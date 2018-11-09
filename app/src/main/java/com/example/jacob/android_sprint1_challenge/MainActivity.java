@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.graphics.Paint;
 
 import java.util.ArrayList;
 
@@ -58,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView getDefaultTextView(final Movie movie) {
         TextView textView = new TextView(context);
         textView.setText(movie.getTitle());
+        boolean watched = movie.getWatched();
+        if (watched == true) {
+            textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }
         textView.setTextSize(24);
         textView.setPadding(10, 10, 10, 10);
         textView.setOnClickListener(new View.OnClickListener() {

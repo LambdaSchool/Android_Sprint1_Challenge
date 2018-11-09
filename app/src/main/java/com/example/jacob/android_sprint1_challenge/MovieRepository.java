@@ -25,8 +25,15 @@ public class MovieRepository {
             movie.setId(movieIndex);
             movies.add(movie);
         } else {
-            movies.set(movie.getId(),movie);
+            movies.set(movie.getId(), movie);
         }
         return movies;
     }
+
+    public ArrayList<Movie> deleteMovie(Movie movie) {
+        movies.remove(movie);
+        return movies;
+    }
+
+
 }

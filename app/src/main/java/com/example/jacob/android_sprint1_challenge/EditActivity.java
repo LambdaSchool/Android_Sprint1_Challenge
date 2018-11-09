@@ -2,8 +2,11 @@ package com.example.jacob.android_sprint1_challenge;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 
@@ -14,6 +17,7 @@ public class EditActivity extends AppCompatActivity {
     EditText editTitle;
     Switch switchWatched;
     Movie movie;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +33,31 @@ public class EditActivity extends AppCompatActivity {
             movie = new Movie(Movie.NO_ID);
             movie.setTitle("");
             movie.setWatched(false);
+        } else {
+            editTitle.setText(movie.getTitle());
+            switchWatched.setChecked(movie.getWatched());
         }
 
-        editTitle.setText(movie.getTitle());
-        switchWatched.setChecked(movie.getWatched());
+        findViewById(R.id.button_save).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+        findViewById(R.id.button_delete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                deleteMovie(movie);
+            }
+        });
+
+
     }
+
+
+
+
 
     @Override
     public void onBackPressed() {
