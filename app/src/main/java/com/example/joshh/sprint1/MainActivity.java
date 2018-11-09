@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final int EDIT_MOVIE_REQUEST_CODE = 1;
+    public static final int EDIT_MOVIE_REQUEST_CODE = 2;
     private Context             context;
     private LinearLayout        ll;
     private Button              addMovieButton;
@@ -85,11 +85,20 @@ public class MainActivity extends AppCompatActivity {
         tv.setWidth(368);
         tv.setPadding(55, 0, 0, 0);
         tv.setTextColor(Color.BLACK);
-        tv.setText(movie.getTitle());
+        tv.setText(movie.getTitle() + " " + movie.getId());
         if(movie.isWatched()){
             tv.setTextColor(Color.GREEN);
             tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.removeMovie(movie);
+                Intent editMovieIntent = new Intent(context, EditActivity.class);
+                editMovieIntent.putExtra(EditActivity.EDIT_MOVIE_KEY, movie);
+                startActivityForResult(editMovieIntent, EDIT_MOVIE_REQUEST_CODE);
+            }
+        });
         return tv;
     }
 }

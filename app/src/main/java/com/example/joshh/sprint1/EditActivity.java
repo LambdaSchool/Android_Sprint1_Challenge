@@ -19,6 +19,7 @@ public class EditActivity extends AppCompatActivity {
     private Switch       watchedSwitch;
     private EditText     title;
     private Movie        movie;
+    private MovieViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,11 @@ public class EditActivity extends AppCompatActivity {
         title               = findViewById(R.id.movie_title);
 
         movie = (Movie) getIntent().getSerializableExtra(EDIT_MOVIE_KEY);
-
+        if(movie == null){
+            movie = new Movie(Movie.NO_ID);
+        }
+        title.setText(movie.getTitle());
+        watchedSwitch.setChecked(movie.isWatched());
 
     }
 
@@ -53,6 +58,13 @@ public class EditActivity extends AppCompatActivity {
                 finish();
             }
         });
+        deleteMovie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                movie.setId(Movie.NO_ID);
+                finish();
+            }
+        });
     }
 
     private void Result(){
@@ -62,5 +74,7 @@ public class EditActivity extends AppCompatActivity {
         resultIntent.putExtra(EDIT_MOVIE_KEY, movie);
         setResult(Activity.RESULT_OK, resultIntent);
     }
+
+
 
 }

@@ -22,14 +22,17 @@ public class MovieRepository {
         if(movie.getId() == Movie.NO_ID){
             int movieIndex = movies.size();
             movie.setId(movieIndex);
-            movies.add(movie);
         }
+        movies.add(movie);
         return movies;
     }
 
     public ArrayList<Movie> removeMovie(Movie movie){
-        int movieIndex = movie.getId();
-        movies.remove(movieIndex);
+        for(int i = movies.size() - 1; i >= 0; i--){
+            if(movies.get(i).getId() == movie.getId()){
+                movies.remove(i);
+            }
+        }
         return movies;
     }
 }
