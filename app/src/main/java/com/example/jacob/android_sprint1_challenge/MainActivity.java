@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, EditActivity.class);
-                Movie newMovie = new Movie(Movie.NO_ID);
-
+//                Movie newMovie = new Movie(Movie.NO_ID);
+                Movie newMovie = null;
                 intent.putExtra(EditActivity.EDIT_MOVIE_KEY, newMovie);
                 startActivityForResult(intent, EDIT_REQUEST_CODE);
             }
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         return textView;
     }
 
-    private void refreshListView( ArrayList<Movie> movies) {
+    private void refreshListView(ArrayList<Movie> movies) {
         layoutList.removeAllViews();
         for (Movie movie : movies) {
             layoutList.addView(getDefaultTextView(movie));

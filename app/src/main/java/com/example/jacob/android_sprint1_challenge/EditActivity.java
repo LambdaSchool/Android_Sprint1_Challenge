@@ -23,17 +23,16 @@ public class EditActivity extends AppCompatActivity {
         editTitle = findViewById(R.id.edit_title);
         switchWatched = findViewById(R.id.switch_watched);
 
+
         movie = (Movie) getIntent().getSerializableExtra(EDIT_MOVIE_KEY);
-        movie = new Movie(Movie.NO_ID);
-/*        if (movie == null) {
+        if(movie == null) {
             movie = new Movie(Movie.NO_ID);
-        } else {
-            editTitle.setText(movie.getTitle());
-            switchWatched.setChecked(movie.getWatched());
-        }*/
+            movie.setTitle("");
+            movie.setWatched(false);
+        }
 
-
-
+        editTitle.setText(movie.getTitle());
+        switchWatched.setChecked(movie.getWatched());
     }
 
     @Override
