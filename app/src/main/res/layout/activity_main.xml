@@ -38,7 +38,7 @@
 
     </ScrollView>
     <Button
-        android:id="@+id/"
+        android:id="@+id/movie_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
