@@ -91,21 +91,6 @@ public class MainActivity extends AppCompatActivity {
             if (requestCode == EDIT_REQUEST_CODE) {
                 if (data != null) {
                     Movie returnedMovie = (Movie) data.getSerializableExtra(EditActivity.EDIT_MOVIE_KEY);
-
-/*                    boolean foundMovie = false;
-                    for(int i = 0; i < movies.size(); ++i) {
-                        if(movies.get(i).getId() == returnedMovie.getId()) {
-                            // this created a bug with an infinite loop, with each loop,
-                            // an element is inserted into the beginning of the arraylist
-//                            movies.add(i, returnedMovie);
-                            movies.set(i, returnedMovie);
-                            foundMovie = true;
-                        }
-                    }
-                    if(!foundMovie) {
-                        movies.add(returnedMovie);
-                    }
-                    refreshListView();*/
                     viewModel.addMovie(returnedMovie);
                 }
             }
