@@ -24,13 +24,16 @@ public class EditActivity extends AppCompatActivity {
         switchWatched = findViewById(R.id.switch_watched);
 
         movie = (Movie) getIntent().getSerializableExtra(EDIT_MOVIE_KEY);
-        if (movie == null) {
+        movie = new Movie(Movie.NO_ID);
+/*        if (movie == null) {
             movie = new Movie(Movie.NO_ID);
-        }
+        } else {
+            editTitle.setText(movie.getTitle());
+            switchWatched.setChecked(movie.getWatched());
+        }*/
 
-        // here we grabbed the movie but didn't use it to populate the ui
-        editTitle.setText(movie.getTitle());
-        switchWatched.setChecked(movie.getWatched());
+
+
     }
 
     @Override
