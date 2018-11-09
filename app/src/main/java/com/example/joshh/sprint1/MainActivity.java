@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         tv.setWidth(368);
         tv.setPadding(55, 0, 0, 0);
         tv.setTextColor(Color.BLACK);
-        tv.setText(movie.getTitle() + " " + movie.getId());
+        tv.setText(movie.getTitle());
         if(movie.isWatched()){
             tv.setTextColor(Color.GREEN);
             tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
