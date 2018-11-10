@@ -38,7 +38,7 @@
         android:text="DELETE"
         android:background="@android:color/holo_red_light"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
         android:id="@+id/button_save"
@@ -48,5 +48,5 @@
         android:paddingLeft="10dp"
         android:background="@android:color/holo_green_light"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 </android.support.constraint.ConstraintLayout>

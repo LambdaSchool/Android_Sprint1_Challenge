@@ -22,8 +22,9 @@ public class EditActivity extends AppCompatActivity {
     Movie movie;
     private MovieViewModel viewModel;
 
-    public static final int DELETE_REQUEST_CODE = 1;
-    public static final int SAVE_REQUEST_CODE = 2;
+    public static final int DELETE_REQUEST_CODE = 2;
+
+    public static final int SAVE_REQUEST_CODE = 3;
 
 
     @Override
@@ -50,55 +51,35 @@ public class EditActivity extends AppCompatActivity {
         findViewById(R.id.button_save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
-//                prepResult();
-//                Intent intent = new Intent(context, MainActivity.class);
-//                startActivityForResult(intent, SAVE_REQUEST_CODE);
+                movie.setTitle(editTitle.getText().toString());
+                movie.setWatched(switchWatched.isChecked());
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra(EDIT_MOVIE_KEY, movie);
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
             }
         });
 
         findViewById(R.id.button_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, MainActivity.class);
-                intent.putExtra(EditActivity.EDIT_MOVIE_KEY, movie);
-                startActivityForResult(intent, DELETE_REQUEST_CODE);
+//                viewModel.deleteMovie(movie);
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra(EDIT_MOVIE_KEY, movie);
+                setResult(Constants.DELETE_RESULT_CODE, resultIntent);
+                finish();
             }
         });
-
-
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == DELETE_REQUEST_CODE) {
-                if (data != null) {
-                    Movie returnedMovie = (Movie) data.getSerializableExtra(EditActivity.EDIT_MOVIE_KEY);
-                    viewModel.deleteMovie(returnedMovie);
-                }
-            } else if (resultCode == SAVE_REQUEST_CODE) {
-                prepResult();
-                onBackPressed();
-            }
-        }
     }
 
 
     @Override
     public void onBackPressed() {
-        prepResult();
         super.onBackPressed();
     }
 
 
     private void prepResult() {
-        movie.setTitle(editTitle.getText().toString());
-        movie.setWatched(switchWatched.isChecked());
-        Intent resultIntent = new Intent();
-        resultIntent.putExtra(EDIT_MOVIE_KEY, movie);
-        setResult(Activity.RESULT_OK, resultIntent);
+
     }
 }

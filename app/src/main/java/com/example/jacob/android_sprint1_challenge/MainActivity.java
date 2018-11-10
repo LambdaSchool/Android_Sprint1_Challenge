@@ -20,7 +20,8 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout layoutList;
     private MovieViewModel viewModel;
 
-    public static final int EDIT_REQUEST_CODE = 1;
+    public static final int EDIT_REQUEST_CODE = 2;
+    public static final int DELETE_REQUEST_CODE = 3;
 
 
     @Override
@@ -48,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, EditActivity.class);
-//                Movie newMovie = new Movie(Movie.NO_ID);
                 Movie newMovie = null;
                 intent.putExtra(EditActivity.EDIT_MOVIE_KEY, newMovie);
                 startActivityForResult(intent, EDIT_REQUEST_CODE);
@@ -93,6 +93,11 @@ public class MainActivity extends AppCompatActivity {
                     Movie returnedMovie = (Movie) data.getSerializableExtra(EditActivity.EDIT_MOVIE_KEY);
                     viewModel.addMovie(returnedMovie);
                 }
+            }
+        }  else if (resultCode == Constants.DELETE_RESULT_CODE) {
+            if (data != null) {
+                Movie returnedMovie = (Movie) data.getSerializableExtra(EditActivity.EDIT_MOVIE_KEY);
+                viewModel.deleteMovie(returnedMovie);
             }
         }
     }

@@ -31,7 +31,11 @@ public class MovieRepository {
     }
 
     public ArrayList<Movie> deleteMovie(Movie movie) {
-        movies.remove(movie);
+        for (int i = 0; i < movies.size(); i++) {
+            if (movies.get(i).getId() == movie.getId()) {
+                movies.remove(i);
+            }
+        }
         return movies;
     }
 
