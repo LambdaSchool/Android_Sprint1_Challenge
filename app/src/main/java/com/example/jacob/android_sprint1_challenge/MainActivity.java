@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     private MovieViewModel viewModel;
 
     public static final int EDIT_REQUEST_CODE = 2;
-    public static final int DELETE_REQUEST_CODE = 3;
 
 
     @Override
@@ -60,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = new TextView(context);
         textView.setText(movie.getTitle());
         boolean watched = movie.getWatched();
-        if (watched == true) {
+        if (watched) {
             textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
         textView.setTextSize(24);
