@@ -6,6 +6,25 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="background_color">@color/background_color</item>
+        <item name="text_color">@color/text_color</item>
+        <item name="add_button_color">@color/add_button_color</item>
+        <item name="cancel_button_color">@color/cancel_button_color</item>
+        <item name="icon_launcher">@drawable/ic_launcher_foreground</item>
+        <item name="icon_taskbar" >@drawable/ic_action_name</item>
+    </style>
+
+    <style name="AppDarkTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/darkColorPrimary</item>
+        <item name="colorPrimaryDark">@color/darkPrimaryDark</item>
+        <item name="colorAccent">@color/darkColorAccent</item>
+        <item name="background_color">@color/background_color_dark</item>
+        <item name="text_color">@color/text_color_dark</item>
+        <item name="add_button_color">@color/add_button_color_dark</item>
+        <item name="cancel_button_color">@color/cancel_button_color_dark</item>
+        <item name="icon_launcher">@drawable/ic_launcher_foreground</item>
+        <item name="icon_taskbar" >@drawable/ic_action_name</item>
     </style>
 
 </resources>

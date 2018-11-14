@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#A47963</color>
+    <color name="colorPrimaryDark">#C8AB83</color>
+    <color name="colorAccent">#AEADF0</color>
+
+    <color name="darkColorPrimary">#0A100D</color>
+    <color name="darkPrimaryDark">#5A464C</color>
+    <color name="darkColorAccent">#B9BAA3</color>
+
+    <color name="background_color">#F1F0CC</color>
+    <color name="text_color">#AEADF0</color>
+    <color name="add_button_color">#C3979F</color>
+    <color name="cancel_button_color">#C97064</color>
+
+    <color name="background_color_dark">#364156</color>
+    <color name="text_color_dark">#D5F2E3</color>
+    <color name="add_button_color_dark">#393A10</color>
+    <color name="cancel_button_color_dark">#5A1807</color>
+
 </resources>

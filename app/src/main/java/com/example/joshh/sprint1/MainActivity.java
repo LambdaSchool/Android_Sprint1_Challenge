@@ -1,12 +1,15 @@
 package com.example.joshh.sprint1;
 
+import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,14 +26,37 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout        ll;
     private Button              addMovieButton;
     private MovieViewModel      viewModel;
+    private FloatingActionButton fab;
+    private int themeId;
+    private Activity activity;
+    public static SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeUtils.onActivityCreateSetTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        preferences = this.getPreferences(Context.MODE_PRIVATE);
         ll              =    findViewById(R.id.scroll_view_layout);
         addMovieButton  =    findViewById(R.id.add_movie_button);
+        fab             =    findViewById(R.id.floating_action_button);
         context         =    this;
+        activity = this;
+    }
+
+    @Override
+    public void setTheme(int resid) {
+        themeId = resid;
+        super.setTheme(resid);
+
+    }
+
+    @Override
+    protected void onStart() {
+        if(!ThemeUtils.checkTheme(activity, themeId)){
+            ThemeUtils.refreshActivity(activity);
+        }
+        super.onStart();
     }
 
     @Override
@@ -57,6 +83,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, EDIT_MOVIE_REQUEST_CODE);
             }
         });
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -81,10 +114,10 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView createDefaultTextView(final Movie movie){
         TextView tv = new TextView(context);
-        tv.setTextSize(30);
-        tv.setWidth(368);
-        tv.setPadding(55, 0, 0, 0);
-        tv.setTextColor(Color.BLACK);
+        tv.setTextSize(getResources().getDimension(R.dimen.list_movie_text_size));
+        tv.setWidth(getResources().getDimensionPixelOffset(R.dimen.list_movie_width));
+        tv.setPadding(getResources().getDimensionPixelOffset(R.dimen.list_movie_padding_left), 0, 0, 0);
+        tv.setTextColor(getResources().getColor(R.color.text_color));
         tv.setText(movie.getTitle());
         if(movie.isWatched()){
             tv.setTextColor(Color.GREEN);

@@ -4,36 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/background_color"
     tools:context=".EditActivity">
-
     <LinearLayout
-        android:id="@+id/title_swtich_parent"
+        android:id="@+id/title_switch_parent"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
         <EditText
             android:id="@+id/movie_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Add a Movie"
+            android:hint="@string/edit_text_add_movie_hint"
             android:inputType="textPersonName"
             android:textColor="@android:color/black"
             android:textSize="24sp" />
-
         <Switch
             android:id="@+id/watched_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Watched"
+            android:text="@string/watched_switch_text"
             android:textAlignment="textEnd" />
     </LinearLayout>
-
     <LinearLayout
         android:id="@+id/button_parent"
         android:layout_width="368dp"
@@ -47,30 +45,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
-
         <Button
             android:id="@+id/delete_movie_button"
             android:layout_width="0.0dip"
             android:layout_height="fill_parent"
             android:layout_weight="1.0"
-            android:backgroundTint="@android:color/holo_red_dark"
-            android:text="Delete Movie"
+            android:backgroundTint="?attr/cancel_button_color"
+            android:text="@string/delete_movie_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/save_movie_button"
-            tools:layout_editor_absoluteY="459dp" />
-
+            tools:layout_editor_absoluteY="?attr/inline_button_width" />
         <Button
             android:id="@+id/save_movie_button"
             android:layout_width="0.0dip"
             android:layout_height="fill_parent"
             android:layout_weight="1.0"
-            android:backgroundTint="@android:color/holo_green_dark"
-            android:text="Add Movie"
+            android:backgroundTint="?attr/add_button_color"
+            android:text="@string/save_movie_button"
             app:layout_constraintEnd_toStartOf="@+id/delete_movie_button"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="459dp" />
+            tools:layout_editor_absoluteY="?attr/inline_button_width" />
     </LinearLayout>
-
 </android.support.constraint.ConstraintLayout>

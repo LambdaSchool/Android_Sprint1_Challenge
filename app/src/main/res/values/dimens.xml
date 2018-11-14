@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="inline_button_absoluteY">459dp</dimen>
+    <dimen name="list_movie_text_size" >10sp</dimen>
+    <dimen name="list_movie_width" >320dp</dimen>
+    <dimen name="list_movie_padding_left" >18dp</dimen>
+</resources>

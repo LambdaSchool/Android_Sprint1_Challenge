@@ -19,20 +19,18 @@ public class EditActivity extends AppCompatActivity {
     private Switch       watchedSwitch;
     private EditText     title;
     private Movie        movie;
-    private MovieViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeUtils.onActivityCreateSetTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-
         buttonParent        = findViewById(R.id.button_parent);
-        titleSwitchParent   = findViewById(R.id.title_swtich_parent);
+        titleSwitchParent   = findViewById(R.id.title_switch_parent);
         addMovie            = findViewById(R.id.save_movie_button);
         deleteMovie         = findViewById(R.id.delete_movie_button);
         watchedSwitch       = findViewById(R.id.watched_switch);
         title               = findViewById(R.id.movie_title);
-
         movie = (Movie) getIntent().getSerializableExtra(EDIT_MOVIE_KEY);
         if(movie == null){
             movie = new Movie(Movie.NO_ID);
