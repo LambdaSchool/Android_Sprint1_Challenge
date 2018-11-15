@@ -10,10 +10,18 @@ public class Movie implements Serializable {
     private boolean watched;
     private int id;
 
-    public Movie(String title, boolean watched, int id) {
+    public Movie(int id, String title, boolean watched){
+        this.id = id;
         this.title = title;
         this.watched = watched;
+    }
+
+    public Movie(int id){
         this.id = id;
+    }
+
+    public static int getNoId() {
+        return NO_ID;
     }
 
     public String getTitle() {
@@ -39,4 +47,6 @@ public class Movie implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+
+
 }

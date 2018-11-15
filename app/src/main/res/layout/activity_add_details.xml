@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddDetails">
+    tools:context="com.example.patrickjmartin.android_sprint1_challenge.AddDetails">
 
     <Button
         android:id="@+id/button"

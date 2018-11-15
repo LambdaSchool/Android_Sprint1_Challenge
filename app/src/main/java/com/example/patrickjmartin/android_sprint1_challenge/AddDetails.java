@@ -5,7 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
 
+import com.lambdaschool.movieslist.R;
+
 public class AddDetails extends AppCompatActivity {
+
+
+    public static final String EDIT_MOVIE_KEY = "edit_movie";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
