@@ -27,8 +27,11 @@ public class AddDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_details);
 
+        movieTitle = findViewById(R.id.editText);
         deleteMovie = findViewById(R.id.button_delete);
         saveMovie = findViewById(R.id.button_save);
+        watchSwitch = findViewById(R.id.switch1);
+
 
         movie = (Movie) getIntent().getSerializableExtra(EDIT_MOVIE_KEY);
         if(movie == null){
