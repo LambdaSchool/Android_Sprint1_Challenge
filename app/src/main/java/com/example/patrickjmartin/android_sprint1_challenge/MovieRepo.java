@@ -24,7 +24,7 @@ public class MovieRepo {
             int movieIndex = movies.size();
             movie.setId((movieIndex));
         }
-
+        movies.add(movie);
         return movies;
     }
 

@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 viewModel.removeMovie(movie);
                 Intent editMovieIntent = new Intent(context, AddDetails.class);
                 editMovieIntent.putExtra(AddDetails.EDIT_MOVIE_KEY, movie);
+                startActivityForResult(editMovieIntent, EDIT_MOVIE_REQUEST_CODE);
 
             }
         });
