@@ -7,12 +7,12 @@
     tools:context="com.example.patrickjmartin.android_sprint1_challenge.AddDetails">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_delete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:background="@color/colorAccent"
-        android:text="Button"
+        android:text="Delete"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button2"
@@ -20,11 +20,11 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_save"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:text="Button"
+        android:text="Save"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

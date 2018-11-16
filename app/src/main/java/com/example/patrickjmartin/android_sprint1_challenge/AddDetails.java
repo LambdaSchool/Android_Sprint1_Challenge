@@ -31,7 +31,11 @@ public class AddDetails extends AppCompatActivity {
         saveMovie = findViewById(R.id.button_save);
 
         movie = (Movie) getIntent().getSerializableExtra(EDIT_MOVIE_KEY);
-        
+        if(movie == null){
+            movie = new Movie(Movie.NO_ID);
+        }
+
+
 
 
     }
