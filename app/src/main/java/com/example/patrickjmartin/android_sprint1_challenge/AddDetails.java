@@ -1,9 +1,11 @@
 package com.example.patrickjmartin.android_sprint1_challenge;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -17,7 +19,6 @@ public class AddDetails extends AppCompatActivity {
 
     private Movie movie;
     private Switch watchSwitch;
-    private Context context;
     private EditText movieTitle;
     private Button deleteMovie, saveMovie;
 
@@ -37,17 +38,35 @@ public class AddDetails extends AppCompatActivity {
         if(movie == null){
             movie = new Movie(Movie.NO_ID);
         }
-
-
-
-
+        movieTitle.setText(movie.getTitle());
+        watchSwitch.setChecked(movie.isWatched());
     }
+
+
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        Intent intent =  getIntent();
+        saveMovie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                movie.setTitle(movieTitle.getText().toString());
+                movie.setWatched(watchSwitch.isChecked());
+                Intent editIntent = new Intent();
+                editIntent.putExtra(EDIT_MOVIE_KEY, movie);
+                setResult(Activity.RESULT_OK, editIntent);
+                finish();
+            }
+        });
+
+        deleteMovie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                movie.setId(Movie.NO_ID);
+                finish();
+            }
+        });
 
     }
 }
