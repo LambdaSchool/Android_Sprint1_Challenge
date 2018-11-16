@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent addMovieIntent = new Intent(context, AddDetails.class);
-                Movie movie = null;
+                Movie movie = new Movie(Movie.NO_ID);
                 addMovieIntent.putExtra(AddDetails.EDIT_MOVIE_KEY, movie);
                 startActivityForResult(addMovieIntent, EDIT_MOVIE_REQUEST_CODE);
             }
