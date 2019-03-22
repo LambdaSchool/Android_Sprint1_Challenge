@@ -62,5 +62,16 @@ public class DetailsView extends AppCompatActivity {
                     startActivity(intent);
             }
         });
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (index != -1){
+                    movieList.remove(index);
+                }
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.putExtra("movieList", movieList);
+                startActivity(intent);
+            }
+        });
     }
 }
