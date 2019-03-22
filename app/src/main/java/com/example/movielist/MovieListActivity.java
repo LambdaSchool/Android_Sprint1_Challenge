@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -32,24 +33,35 @@ public class MovieListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Intent intent = this.getIntent();
+        if(intent.getExtras() != null) {
+            if (intent.getStringExtra("FirstKey").equals("add")) {
+                TextView tv = new TextView(context);
+                tv.setText("test");
+
+               ll.addView(createTextView(MovieEntryRepo.getMovieEntry(intent.getIntExtra("key", 0)-1)));
+            }
+        }
+
     }
 
     public TextView createTextView(MovieEntry entry){
-        final TextView tv = new TextView(context);
+        TextView tv = new TextView(context);
         tv.setText(entry.getTitle());
         tv.setPadding(15,7,15,7);
         tv.setTextSize(24);
         tv.setId(entry.getId());
-        if(entry.isWatched()){
-            tv.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-        }
+      //  if(entry.isWatched()){
+        //    tv.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+       // }
 
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context,AddMovieActivity.class);
                 intent.putExtra("key", tv.getId());
-                ll.removeView(tv);
+                //ll.removeView(tv);
                 startActivity(intent);
             }
         });

@@ -1,5 +1,6 @@
 package com.example.movielist;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ public class AddMovieActivity extends AppCompatActivity {
     Switch watchedSwitch;
     Button confirmButton;
     Button removeButton;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +27,29 @@ public class AddMovieActivity extends AppCompatActivity {
         confirmButton = findViewById(R.id.button_confirm);
         removeButton  = findViewById(R.id.button_remove);
 
+        context = this;
+
         Intent intent = this.getIntent();
-        editMovieEntry(MovieEntryRepo.getMovieEntry(intent.getIntExtra("key",0)));
+        if(intent.getExtras() != null){
+            editMovieEntry(MovieEntryRepo.getMovieEntry(intent.getIntExtra("keyMovieClick",0)));
+        }
+
+
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MovieEntry movieEntry = new MovieEntry();
+                movieEntry.setId(MovieEntryRepo.getIndex());
+                movieEntry.setTitle(titleField.getText().toString());
+               // movieEntry.setWatched(watchedSwitch.isChecked());
 
+                MovieEntryRepo.addToMovieList(movieEntry);
+
+                Intent intent = new Intent(context, MovieListActivity.class);
+                intent.putExtra("FirstKey", "add");
+                intent.putExtra("key", movieEntry.getId());
+                startActivity(intent);
             }
         });
 
@@ -47,7 +65,7 @@ public class AddMovieActivity extends AppCompatActivity {
         titleField.setText(entry.getTitle());
         watchedSwitch.setChecked(entry.isWatched());
 
-        addEntry(entry);
+      //  addEntry(entry);
     }
 
     public void addEntry(){
