@@ -14,10 +14,20 @@ public class MainActivity extends AppCompatActivity {
 Intent fullIntent;
 Button addButton;
 Context context;
+Boolean viewed;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent saveMovie = new Intent();
+        String movieName = saveMovie.getStringExtra("movieName");
+        viewed = saveMovie.getBooleanExtra("viewed", false);
+
+
+
+
+
+
         addButton = findViewById(R.id.button_add_movie);
         context = this;
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -47,7 +57,7 @@ Context context;
 
 
 
-    public TextView createTextView(final String imageText, final int listIndex){
+    public TextView createTextView(final String imageText, final int listIndex,  Boolean viewed){
         fullIntent = new Intent(context, MainActivity.class);
         TextView        textView        = new TextView (getApplicationContext ());
         ScrollView layoutLinear    = findViewById ( R.id.scroll_view );
@@ -58,6 +68,12 @@ Context context;
         textView.setPadding ( 10,10,10,10 );
         textView.setWidth ( 200);
         textView.setHeight ( 100 );
+        if(viewed = true){
+            textView.setTextColor(getResources().getColor(R.color.colorPrimary));
+        }else {textView.setTextColor(getResources().getColor(R.color.colorAccent));}
+
+
+
         textView.setOnClickListener(new View.OnClickListener() {
 
             @Override
