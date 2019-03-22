@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class MovieListing implements Serializable {
     String name = "";
-    boolean watched = false;
+    boolean watched;
 
     public String getName() {
         return name;

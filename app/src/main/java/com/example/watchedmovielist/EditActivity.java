@@ -30,12 +30,13 @@ public class EditActivity extends AppCompatActivity {
 
         if(movie != null) {
 
-            
+            editTextView.setText(movie.getName());
+            watchedFlag.setChecked(movie.isWatched());
+
 
         }
 
-        // 1. Check and see if sent movie
-        // 2. if yes, populate fields
+        
         // 3. Set save/delete functionality via onclick listeners for buttons
 
 
