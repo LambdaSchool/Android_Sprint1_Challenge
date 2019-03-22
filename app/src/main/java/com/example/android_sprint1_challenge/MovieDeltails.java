@@ -14,7 +14,7 @@ Switch viewed;
         setContentView(R.layout.activity_movie_deltails);
         editText = findViewById(R.id.movie_edit_text);
         viewed = findViewById(R.id.switch1);
-        
+
 
 
 
