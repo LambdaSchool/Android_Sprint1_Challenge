@@ -22,11 +22,16 @@ Context context;
 
         context = this;
 
-        ((Button)findViewById(R.id.add_movie)).setOnClickListener(new View.OnClickListener() {
+        /*findViewById(R.id.add_movie).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent addMovieButton = new Intent(ACTION_SEND);
+                startActivityForResult(addMovieButton, ??? );
             }
-        });
+        });*/
+
+        LOST!
     }
+
+
 }
