@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         context = this;
 
         Intent intent = getIntent();
-        if ((ArrayList)intent.getSerializableExtra("movieList") != null) {
+        if ((intent.getSerializableExtra("movieList") != null)) {
             movieList = (ArrayList) intent.getSerializableExtra("movieList");
         }
 
@@ -54,7 +54,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewGenerator(String title, boolean watched, final int index) {
         TextView tv = new TextView(context);
         tv.setText(title);
-        if (!watched) tv.setTypeface(Typeface.DEFAULT_BOLD);
+        if (!watched) {
+            tv.setTypeface(Typeface.DEFAULT_BOLD);
+        }
 
         //Each Listed Item's onClick Listener
         tv.setOnClickListener(new View.OnClickListener() {

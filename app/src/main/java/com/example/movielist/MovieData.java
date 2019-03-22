@@ -2,6 +2,8 @@ package com.example.movielist;
 
 import java.io.Serializable;
 
+
+//Didn't utilize in this class, since it is just the index when the object is created, so 2 objects can have matching indices
 public class MovieData implements Serializable {
     private String title;
     private boolean watched;
