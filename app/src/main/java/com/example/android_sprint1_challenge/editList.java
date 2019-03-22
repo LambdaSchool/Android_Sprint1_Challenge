@@ -13,7 +13,9 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
-public class editList extends AppCompatActivity {
+public class editList extends AppCompatActivity
+{
+    final int REQUEST_CODE = 19;
 
     EditText addMovie;
     AppCompatCheckBox checkWatched;
@@ -42,7 +44,9 @@ public class editList extends AppCompatActivity {
 
                 intent = new Intent(context, MainActivity.class);
                 intent.putExtra("movie", movie);
-                startActivityForResult(intent, 1);
+                setResult(RESULT_OK, intent);
+                startActivityForResult(intent, REQUEST_CODE);
+                finish();
             }
         });
     }

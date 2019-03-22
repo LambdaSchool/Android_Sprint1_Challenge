@@ -3,6 +3,7 @@ package com.example.android_sprint1_challenge;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,10 +17,13 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    final int REQUEST_CODE = 19;
+
     Button addButton;
     Context context;
     LinearLayout scrollLayout;
-    final ArrayList<movieModel> movies = new ArrayList<>();
+
+    //final ArrayList<movieModel> movies = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,31 +51,26 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent intent) {
-        super.onActivityResult(1, resultCode, getIntent());
+        super.onActivityResult(requestCode, resultCode, intent);
         if (resultCode == RESULT_OK) {
-            if (requestCode == 1) {
+            if (requestCode == REQUEST_CODE) {
 
                 Log.i("check", "onActivityResult: activity");
 
                 ArrayList<movieModel> movies = new ArrayList<>();
-
-
                 //Intent finalIntent = getIntent();
-                movieModel serialisedMovieIntent = (movieModel) getIntent().getSerializableExtra("movie");
-
-                movies.add(serialisedMovieIntent);
-
-
+                movieModel movie = (movieModel) getIntent().getSerializableExtra("movie");
+                movies.add(movie);
                 //for (movieModel movie : movies) {
 
-                scrollLayout.addView(createTextView(serialisedMovieIntent.getTitle(), serialisedMovieIntent.isSeen()));
+                scrollLayout.addView(createTextView(movie.getTitle(), movie.isSeen()));
 
 
 
-                //}
+                }
             }
         }
-    }
+
 
 
 
