@@ -56,8 +56,5 @@ public class EditActivity extends AppCompatActivity {
             }
         }));
 
-        // 3. Set save/delete functionality via onclick listeners for buttons
-
-
     }
 }
