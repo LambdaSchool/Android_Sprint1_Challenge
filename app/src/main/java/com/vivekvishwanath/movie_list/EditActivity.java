@@ -53,7 +53,6 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
-        movie.setWatched(watchedSwitch.isChecked());
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +64,7 @@ public class EditActivity extends AppCompatActivity {
 
     protected void onSavePressed(Movie movie) {
         if (movie != null) {
+            movie.setWatched(watchedSwitch.isChecked());
             Intent saveIntent = new Intent();
             saveIntent.putExtra(Movie.MOVIE_TAG, movie);
             setResult(Activity.RESULT_OK, saveIntent);

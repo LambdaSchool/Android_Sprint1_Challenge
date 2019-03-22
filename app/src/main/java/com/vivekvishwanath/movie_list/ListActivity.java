@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class ListActivity extends AppCompatActivity {
     Context context;
     LinearLayout movieListView;
@@ -21,11 +23,15 @@ public class ListActivity extends AppCompatActivity {
     public static final int ADD_IMAGE_REQUEST = 2;
     public static final int EDIT_IMAGE_REQUEST =3;
 
+    private ArrayList<Movie> movies;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
         context = this;
+
+        movies = new ArrayList<>();
 
         addMovieButton = findViewById(R.id.add_movie_button);
         movieListView = findViewById(R.id.movie_list_view);
@@ -43,7 +49,11 @@ public class ListActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == ADD_IMAGE_REQUEST) {
             if (data != null) {
-
+                Movie newMovie = (Movie) data.getSerializableExtra(Movie.MOVIE_TAG);
+                if (newMovie.getMovieTitle() != null) {
+                    movies.add(newMovie);
+                    movieListView.addView(createMovieView(newMovie));
+                }
             }
         }
     }
@@ -51,9 +61,9 @@ public class ListActivity extends AppCompatActivity {
     private TextView createMovieView(final Movie movie) {
         TextView movieView = new TextView(context);
         movieView.setText(movie.getMovieTitle());
-        movieView.setTextColor(movie.isWatched() ?
-                getResources().getColor(watchedColor)
-                : getResources().getColor(unwatchedColor) );
+        if (movie.isWatched()) {
+            movieView.setTextColor(getResources().getColor(watchedColor));
+        } else { movieView.setTextColor(getResources().getColor(unwatchedColor)); }
         movieView.setTextSize(20);
         movieView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,3 +76,4 @@ public class ListActivity extends AppCompatActivity {
         return movieView;
     }
 }
+
