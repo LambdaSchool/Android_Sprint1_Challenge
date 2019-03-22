@@ -1,8 +1,10 @@
 package com.example.israel.sprint1;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,6 +36,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         movieListLinearLayout.addView(newTextView);
+
+        newTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MovieDetailsActivity.class);
+                
+            }
+        });
 
     }
 }
