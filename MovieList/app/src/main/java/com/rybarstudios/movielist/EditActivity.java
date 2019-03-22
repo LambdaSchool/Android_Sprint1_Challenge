@@ -52,7 +52,11 @@ public class EditActivity extends AppCompatActivity {
         ((Button)findViewById(R.id.delete_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                movieEntry.setId(Movie.INVALID_ID);
+
+
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra(Movie.TAG, movieEntry);
+                setResult(Activity.RESULT_OK, resultIntent);
                 finish();
             }
         });

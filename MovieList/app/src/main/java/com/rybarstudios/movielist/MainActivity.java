@@ -88,6 +88,8 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 intent.putExtra(Movie.TAG, movieEntry);
                 startActivityForResult(intent, EDIT_REQUEST_CODE);
                 //TODO remove movie from list, then re-add it. Won't have to check for duplicates
+                movieList.remove(movieEntry);
+                //TODO: fix crash when list is empty after user delete
 
             }
         });
