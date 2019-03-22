@@ -1,6 +1,7 @@
 package com.example.israel.sprint1;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -13,6 +14,9 @@ import android.widget.TextView;
 public class MovieListActivity extends AppCompatActivity {
 
     public static final String MOVIE_KEY = "movie";
+    public static final int REQUEST_CODE_MOVIE_EDIT = 0;
+    public static final int RESULT_CODE_MOVIE_EDIT_DELETE = 0;
+    public static final int RESULT_CODE_MOVIE_EDIT_SAVE = 1;
 
     private LinearLayout movieListLinearLayout;
 
@@ -29,7 +33,7 @@ public class MovieListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MovieListActivity.this, MovieDetailsActivity.class);
                 // adding a movie
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE_MOVIE_EDIT);
 
             }
         });
@@ -37,6 +41,24 @@ public class MovieListActivity extends AppCompatActivity {
         // create dummy movies
         createTextView(new Movie("Dino", true));
         createTextView(new Movie("Dragon", false));
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+
+        if (intent == null) { // this will actually delete the movie
+            return;
+        }
+
+        switch (requestCode) {
+            case REQUEST_CODE_MOVIE_EDIT: {
+                if (resultCode == RESULT_CODE_MOVIE_EDIT_SAVE) {
+                    // @TODO create movie textView
+                } // delete textView. the text view was already deleted when the details activity was opened
+            } break;
+        }
 
     }
 
@@ -57,7 +79,7 @@ public class MovieListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MovieListActivity.this, MovieDetailsActivity.class);
                 intent.putExtra(MOVIE_KEY, movie);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE_MOVIE_EDIT);
 
                 // remove the textView
                 ViewGroup viewGroup = (ViewGroup)v.getParent();

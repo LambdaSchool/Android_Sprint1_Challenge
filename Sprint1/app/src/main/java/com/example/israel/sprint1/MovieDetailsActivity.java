@@ -59,6 +59,10 @@ public class MovieDetailsActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // no need to send back anything since we're just deleting
+                setResult(MovieListActivity.RESULT_CODE_MOVIE_EDIT_DELETE);
+                finishActivity(MovieListActivity.REQUEST_CODE_MOVIE_EDIT);
+                finish();
 
             }
         });
