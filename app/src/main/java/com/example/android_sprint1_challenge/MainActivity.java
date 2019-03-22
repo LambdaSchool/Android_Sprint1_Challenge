@@ -2,6 +2,7 @@ package com.example.android_sprint1_challenge;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Movie;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,19 +11,34 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
-Intent fullIntent;
+LinearLayout layoutLinear;
+    Intent fullIntent;
 Button addButton;
 Context context;
 Boolean viewed;
+    ArrayList movieArray = new ArrayList<String>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent saveMovie = new Intent();
+        Intent saveMovie =getIntent();
+        saveMovie.getExtras();
         String movieName = saveMovie.getStringExtra("movieName");
         viewed = saveMovie.getBooleanExtra("viewed", false);
 
+        if(movieName != null){
+            movieArray.add(movieName);
+            int listIndex = movieArray.indexOf(movieName);
+            String storedMovieName = movieArray.get(listIndex).toString();
+            createTextView(storedMovieName,listIndex);
+        }
 
 
 
@@ -57,10 +73,10 @@ Boolean viewed;
 
 
 
-    public TextView createTextView(final String imageText, final int listIndex,  Boolean viewed){
-        fullIntent = new Intent(context, MainActivity.class);
+    public TextView createTextView(final String imageText, final int listIndex){
+        fullIntent = new Intent(MainActivity.this, MovieDeltails.class);
         TextView        textView        = new TextView (getApplicationContext ());
-        ScrollView layoutLinear    = findViewById ( R.id.scroll_view );
+        layoutLinear    = findViewById ( R.id.scroll_view );
         layoutLinear.addView ( textView);
         textView.setId ( listIndex );
         textView.setText ( imageText );
