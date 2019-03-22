@@ -62,12 +62,12 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 Movie movieEntry = (Movie) data.getSerializableExtra(Movie.TAG);
                 movieList = addMovie(movieEntry);
             }
-        }/*else if(requestCode == EDIT_REQUEST_CODE) {
+        }else if(requestCode == EDIT_REQUEST_CODE) {
             if(data != null){
                 Movie movieEntry = (Movie) data.getSerializableExtra(Movie.TAG);
                 movieList.set(movieEntry.getId(), movieEntry);
             }
-        }*/
+        }
     }
 
     private TextView genTextView(final Movie movieEntry) {
