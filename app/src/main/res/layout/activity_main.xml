@@ -5,33 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MovieActivity">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="9">
 
         <LinearLayout
             android:id="@+id/list_of_movies"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
+            android:orientation="vertical">
+
             <Button
                 android:id="@+id/add_movie"
-                style="@style/Widget.AppCompat.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="vertical"
-                android:text="Add Movie"
-                />
+                android:text="Add Movie" />
 
         </LinearLayout>
 
     </ScrollView>
-
-
-
 
 
 </LinearLayout>
