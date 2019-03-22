@@ -55,7 +55,6 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent viewDetailIntent = new Intent();
-                startActivity(viewDetailIntent);
                 setResult(Activity.RESULT_CANCELED, viewDetailIntent);
                 finish();
             }

@@ -1,5 +1,6 @@
 package com.example.watchedmovielist;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        if(resultCode == Activity.RESULT_CANCELED) return;
         MovieListing movie = (MovieListing)data.getSerializableExtra("KEY");
 
         if(movie != null) {
