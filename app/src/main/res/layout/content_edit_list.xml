@@ -9,11 +9,23 @@
     tools:showIn="@layout/activity_edit_list"
     android:orientation="vertical">
 
+
+
     <EditText
+        android:id="@+id/add_movie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="add movie to list"
         android:textStyle="bold"
-        android:textSize="36dp"/>
+        android:textSize="24dp"/>
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/check_watched"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="watched"
+        android:textSize="24dp"
+        android:layout_gravity="right"/>
+
 
 </LinearLayout>

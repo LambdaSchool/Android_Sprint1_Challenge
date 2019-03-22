@@ -2,9 +2,9 @@ package com.example.android_sprint1_challenge;
 
 public class movieModel
 {
-    int index;
-    String title;
-    boolean seen;
+    private int index;
+    private  String title;
+    private  boolean seen;
 
     public movieModel(int index, String title, boolean seen)
     {
