@@ -21,7 +21,6 @@ public class ListActivity extends AppCompatActivity {
     Button buttonAdd;
     Context context;
     public final int MOVIE_REQUEST_CODE = 1;
-    static ArrayList<Movies> moviesList;
     static int id = 0;
 
     @Override
@@ -41,14 +40,13 @@ public class ListActivity extends AppCompatActivity {
                 startActivityForResult(intent, MOVIE_REQUEST_CODE);
             }
         });
-
-        moviesList = new ArrayList<>();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         layoutList.removeAllViews();
+        ArrayList<Movies> moviesList = MoviesRepository.getMoviesList();
         for(Movies allmovies: moviesList) {
             layoutList.addView(createMovieView(allmovies));
         }
@@ -81,10 +79,10 @@ public class ListActivity extends AppCompatActivity {
             if (data != null) {
                 Movies movie = (Movies) data.getSerializableExtra("movie");
                 if ((Boolean) data.getSerializableExtra("add")) {
-                    moviesList.add(movie);
+                    MoviesRepository.addMovieToList(movie);
 
                 }else{
-                    moviesList.remove(movie.getId());
+                    MoviesRepository.removeMovieFromList(movie.getId());
                     }
                 }
             }
