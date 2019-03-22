@@ -48,7 +48,7 @@ public class AddMovieActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(context, MovieListActivity.class);
                 intent.putExtra("FirstKey", "add");
-                intent.putExtra("key", movieEntry.getId());
+                intent.putExtra("key", movieEntry);
                 startActivity(intent);
             }
         });
