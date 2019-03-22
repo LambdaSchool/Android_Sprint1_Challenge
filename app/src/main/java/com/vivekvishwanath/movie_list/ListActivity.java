@@ -54,6 +54,17 @@ public class ListActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        movieListView.removeAllViews();
+        
+        for (TextView movieView : movieViews) {
+            movieListView.addView(movieView);
+        }
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == ADD_IMAGE_REQUEST) {
             if (data != null) {
@@ -62,7 +73,6 @@ public class ListActivity extends AppCompatActivity {
                     newMovie.setMovieId(movieIndex++);
                     movies.add(newMovie);
                     TextView newMovieView = createMovieView(newMovie);
-                    movieListView.addView(newMovieView);
                     movieViews.add(newMovieView);
                 }
             }
@@ -70,10 +80,10 @@ public class ListActivity extends AppCompatActivity {
 
         if (resultCode == Activity.RESULT_OK && requestCode == EDIT_IMAGE_REQUEST) {
             if (data != null) {
-                Movie movie = (Movie) data.getSerializableExtra(Movie.MOVIE_TAG);
-                movies.set(movie.getMovieId(), movie);
-                movieViews.get(movie.getMovieId()).setText(movie.getMovieTitle());
-                movieViews.set(movie.getMovieId(), createMovieView(movie));
+                Movie editedMovie = (Movie) data.getSerializableExtra(Movie.MOVIE_TAG);
+                movies.set(editedMovie.getMovieId(), editedMovie);
+                TextView editedMovieView = createMovieView(editedMovie);
+                movieViews.set(editedMovie.getMovieId(), editedMovieView);
             }
         }
     }
