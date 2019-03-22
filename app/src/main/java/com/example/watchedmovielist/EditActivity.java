@@ -52,7 +52,7 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent viewDetailIntent = new Intent(context, MainActivity.class);
-                
+                startActivity(viewDetailIntent);
             }
         }));
 
