@@ -32,9 +32,8 @@ public class MovieListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MovieListActivity.this, MovieDetailsActivity.class);
-                // adding a movie
+                // adding a movie, no need to send data
                 startActivityForResult(intent, REQUEST_CODE_MOVIE_EDIT);
-
             }
         });
 
@@ -56,6 +55,10 @@ public class MovieListActivity extends AppCompatActivity {
             case REQUEST_CODE_MOVIE_EDIT: {
                 if (resultCode == RESULT_CODE_MOVIE_EDIT_SAVE) {
                     // @TODO create movie textView
+                    Movie movie = (Movie)intent.getSerializableExtra(MOVIE_KEY);
+                    if (movie != null) {
+                        createTextView(movie);
+                    }
                 } // delete textView. the text view was already deleted when the details activity was opened
             } break;
         }

@@ -30,6 +30,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         }
 
         EditText movieNameEditText = findViewById(R.id.edit_text_movie_name);
+        movieNameEditText.setText(movie.getName());
         movieNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -48,6 +49,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         });
 
         Switch isWatchedSwitch = findViewById(R.id.switch_is_watched);
+        isWatchedSwitch.setChecked(movie.isWatched());
         isWatchedSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -71,7 +73,12 @@ public class MovieDetailsActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // return the edited/added movie
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra(MovieListActivity.MOVIE_KEY, movie);
+                setResult(MovieListActivity.RESULT_CODE_MOVIE_EDIT_SAVE, resultIntent);
+                finishActivity(MovieListActivity.REQUEST_CODE_MOVIE_EDIT);
+                finish();
             }
         });
 
