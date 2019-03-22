@@ -16,11 +16,11 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-LinearLayout layoutLinear;
+    LinearLayout layoutLinear;
     Intent fullIntent;
-Button addButton;
-Context context;
-Boolean viewed;
+    Button addButton;
+    Context context;
+    Boolean viewed;
     ArrayList movieArray = new ArrayList<String>();
 
 
@@ -31,18 +31,15 @@ Boolean viewed;
         Intent saveMovie =getIntent();
         saveMovie.getExtras();
         String movieName = saveMovie.getStringExtra("movieName");
-        viewed = saveMovie.getBooleanExtra("viewed", false);
+
 
         if(movieName != null){
             movieArray.add(movieName);
             int listIndex = movieArray.indexOf(movieName);
             String storedMovieName = movieArray.get(listIndex).toString();
-            createTextView(storedMovieName,listIndex);
+            Boolean isViewed = (Boolean) saveMovie.getSerializableExtra("watched");
+            createTextView(storedMovieName,listIndex, isViewed);
         }
-
-
-
-
 
         addButton = findViewById(R.id.button_add_movie);
         context = this;
@@ -73,7 +70,7 @@ Boolean viewed;
 
 
 
-    public TextView createTextView(final String imageText, final int listIndex){
+    public TextView createTextView(final String imageText, final int listIndex, final Boolean isViewed){
         fullIntent = new Intent(MainActivity.this, MovieDeltails.class);
         TextView        textView        = new TextView (getApplicationContext ());
         layoutLinear    = findViewById ( R.id.scroll_view );
@@ -84,7 +81,7 @@ Boolean viewed;
         textView.setPadding ( 10,10,10,10 );
         textView.setWidth ( 200);
         textView.setHeight ( 100 );
-        if(viewed = true){
+        if(isViewed){
             textView.setTextColor(getResources().getColor(R.color.colorPrimary));
         }else {textView.setTextColor(getResources().getColor(R.color.colorAccent));}
 
@@ -96,6 +93,7 @@ Boolean viewed;
             public void onClick(View v) {
                 fullIntent.putExtra("index", listIndex);
                 fullIntent.putExtra("name", imageText );
+                fullIntent.putExtra("isviewed", isViewed);
                 startActivity(fullIntent);
 
 

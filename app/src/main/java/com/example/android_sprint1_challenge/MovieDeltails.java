@@ -15,11 +15,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MovieDeltails extends AppCompatActivity implements Serializable {
-EditText editText;
-Switch viewedSwitch;
-Button saveButton, deleteButton;
-String movieName;
-Context context = this;
+    EditText editText;
+    Switch viewedSwitch;
+    Button saveButton, deleteButton;
+    String movieName;
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
