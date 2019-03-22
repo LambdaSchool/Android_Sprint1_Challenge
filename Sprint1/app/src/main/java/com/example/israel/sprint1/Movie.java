@@ -1,6 +1,8 @@
 package com.example.israel.sprint1;
 
-public class Movie {
+import java.io.Serializable;
+
+public class Movie implements Serializable {
     private String name;
     private boolean isWatched;
 
