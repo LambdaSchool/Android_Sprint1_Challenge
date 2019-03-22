@@ -1,10 +1,13 @@
 package com.vivekvishwanath.movie_list;
 
-public class Movie {
+import java.io.Serializable;
+
+public class Movie implements Serializable {
 
     private String movieTitle;
     private int movieId;
     private boolean isWatched;
+    public static final String MOVIE_TAG = "Movie";
 
     public Movie(String movieTitle, int movieId, boolean isWatched) {
         this.movieTitle = movieTitle;

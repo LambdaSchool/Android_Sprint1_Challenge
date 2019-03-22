@@ -1,9 +1,12 @@
 package com.vivekvishwanath.movie_list;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -31,6 +34,7 @@ public class EditActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        movie = new Movie();
 
         movieTitleEntry.addTextChangedListener(new TextWatcher() {
             @Override
@@ -51,5 +55,20 @@ public class EditActivity extends AppCompatActivity {
 
         movie.setWatched(watchedSwitch.isChecked());
 
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onSavePressed(movie);
+            }
+        });
+    }
+
+    protected void onSavePressed(Movie movie) {
+        if (movie != null) {
+            Intent saveIntent = new Intent();
+            saveIntent.putExtra(Movie.MOVIE_TAG, movie);
+            setResult(Activity.RESULT_OK, saveIntent);
+            finish();
+        }
     }
 }
