@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class MovieListActivity extends AppCompatActivity {
 
     public static final String MOVIE_KEY = "movie";
@@ -20,6 +22,8 @@ public class MovieListActivity extends AppCompatActivity {
     public static final int RESULT_CODE_MOVIE_EDIT_SAVE = 1;
 
     private LinearLayout movieListLinearLayout;
+
+    private ArrayList<Movie> movieArrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +43,8 @@ public class MovieListActivity extends AppCompatActivity {
         });
 
 //        // create dummy movies
-//        createTextView(new Movie("Dino", true));
-//        createTextView(new Movie("Dragon", false));
+//        addMovie(new Movie("Dino", true));
+//        addMovie(new Movie("Dragon", false));
 
     }
 
@@ -57,12 +61,16 @@ public class MovieListActivity extends AppCompatActivity {
                 if (resultCode == RESULT_CODE_MOVIE_EDIT_SAVE) {
                     Movie movie = (Movie)intent.getSerializableExtra(MOVIE_KEY);
                     if (movie != null) {
-                        createTextView(movie);
+                        addMovie(movie); // add the movie that was returned
                     }
                 } // delete textView. the text view was already deleted when the details activity was opened
             } break;
         }
+    }
 
+    private void addMovie(Movie movie) {
+        movieArrayList.add(movie);
+        createTextView(movie);
     }
 
     private void createTextView(final Movie movie) {
@@ -84,11 +92,13 @@ public class MovieListActivity extends AppCompatActivity {
                 intent.putExtra(MOVIE_KEY, movie);
                 startActivityForResult(intent, REQUEST_CODE_MOVIE_EDIT);
 
+                // remove movie. this will be added later if it is saved
+                movieArrayList.remove(v.getTag());
+
                 // remove the textView
                 ViewGroup viewGroup = (ViewGroup)v.getParent();
                 viewGroup.removeView(v);
             }
         });
-
     }
 }
