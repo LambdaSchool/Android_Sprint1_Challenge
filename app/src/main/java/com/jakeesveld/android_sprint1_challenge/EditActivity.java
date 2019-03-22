@@ -2,16 +2,15 @@ package com.jakeesveld.android_sprint1_challenge;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Movie;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
-
-import java.util.List;
 
 public class EditActivity extends AppCompatActivity {
 
@@ -22,6 +21,7 @@ public class EditActivity extends AppCompatActivity {
     Boolean isWatched;
     Context context;
     public final int MOVIE_REQUEST_CODE = 1;
+    String newMovieTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,43 +37,23 @@ public class EditActivity extends AppCompatActivity {
         context = this;
         isWatched = false;
 
-
-        buttonAdd.setOnClickListener(new View.OnClickListener() {
+        textEditTitle.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                String movieTitle = textEditTitle.getText().toString();
-                Boolean movieWatched = isWatched;
-                newMovie.setTitle(movieTitle);
-                newMovie.setWatched(movieWatched);
-                intent.putExtra("movie", newMovie);
-                intent.putExtra("add", true);
-                setResult(MOVIE_REQUEST_CODE, intent);
-                finish();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                newMovieTitle = textEditTitle.getText().toString();
             }
         });
 
-        buttonDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Movies movie = new Movies(textEditTitle.getText().toString(), isWatched);
-//                MoviesRepository.deleteMovieFromList(movie);
-//                Intent intent = new Intent(context, ListActivity.class);
-//                startActivity(intent);
-            }
-        });
-    }
-
-/*    private Movies addMovieToList (String title, Boolean watched){
-        Movies movie = new Movies(title, watched);
-        MoviesRepository.addMovieToList(movie);
-
-        return movie;
-    }*/
-
-    @Override
-    protected void onStart() {
-        super.onStart();
         switchWatched.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -84,6 +64,40 @@ public class EditActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                newMovie.setTitle(newMovieTitle);
+                newMovie.setWatched(isWatched);
+                intent.putExtra("movie", newMovie);
+                intent.putExtra("add", true);
+                setResult(MOVIE_REQUEST_CODE, intent);
+                finish();
+            }
+        });
+
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newMovie.setTitle(newMovieTitle);
+                newMovie.setWatched(isWatched);
+                intent.putExtra("movie", newMovie);
+                intent.putExtra("add", false);
+                setResult(MOVIE_REQUEST_CODE, intent);
+                finish();
+
+            }
+        });
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     @Override
