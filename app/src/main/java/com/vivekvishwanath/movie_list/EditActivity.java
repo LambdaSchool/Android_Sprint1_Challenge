@@ -31,6 +31,7 @@ public class EditActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         movieTitleEntry.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -44,8 +45,11 @@ public class EditActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                
+                movie.setMovieTitle(s.toString());
             }
         });
+
+        movie.setWatched(watchedSwitch.isChecked());
+
     }
 }
