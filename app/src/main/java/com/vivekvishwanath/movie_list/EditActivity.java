@@ -34,7 +34,15 @@ public class EditActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        movie = new Movie();
+
+        Intent intent = getIntent();
+        if (intent.hasExtra(Movie.MOVIE_TAG)) {
+            movie = (Movie) intent.getSerializableExtra(Movie.MOVIE_TAG);
+            movieTitleEntry.setText(movie.getMovieTitle());
+            watchedSwitch.setChecked(movie.isWatched());
+        } else {
+            movie = new Movie();
+        }
 
         movieTitleEntry.addTextChangedListener(new TextWatcher() {
             @Override
@@ -69,6 +77,6 @@ public class EditActivity extends AppCompatActivity {
             saveIntent.putExtra(Movie.MOVIE_TAG, movie);
             setResult(Activity.RESULT_OK, saveIntent);
             finish();
-        }
+        } else { onBackPressed(); }
     }
 }
