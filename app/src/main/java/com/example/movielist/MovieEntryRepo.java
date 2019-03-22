@@ -6,11 +6,11 @@ public class MovieEntryRepo {
     public static ArrayList<MovieEntry> movieList = new ArrayList<>();
 
 
-    public MovieEntry getMovieEntry(int id){
+    public static MovieEntry getMovieEntry(int id){
         return movieList.get(id);
     }
 
-    public void addToMovieList(MovieEntry entry){
+    public static void addToMovieList(MovieEntry entry){
         movieList.add(entry);
     }
 

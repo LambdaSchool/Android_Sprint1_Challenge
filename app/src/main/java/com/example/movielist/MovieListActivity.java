@@ -49,6 +49,7 @@ public class MovieListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(context,AddMovieActivity.class);
                 intent.putExtra("key", tv.getId());
+                ll.removeView(tv);
                 startActivity(intent);
             }
         });
