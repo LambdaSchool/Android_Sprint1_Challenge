@@ -1,13 +1,15 @@
 package com.example.android_sprint1_challenge;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.EditText;
 
 class MainActivity extends AppCompatActivity {
 
 
-    Context context;
+    private EditText entryMovieName;
+
+
 
 
     @Override
@@ -15,7 +17,7 @@ class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        context = this;
+
 
 
     }
