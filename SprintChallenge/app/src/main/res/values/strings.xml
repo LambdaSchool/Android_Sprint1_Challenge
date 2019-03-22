@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SprintChallenge</string>
+    <string name="movie">Movie</string>
+    <string name="delete">Delete</string>
+    <string name="save">Save</string>
+    <string name="add_movie">Add Movie</string>
+    <string name="name">Name</string>
+</resources>
