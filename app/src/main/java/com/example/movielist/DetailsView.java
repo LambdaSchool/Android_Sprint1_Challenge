@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class DetailsView extends AppCompatActivity {
     ArrayList<MovieData> movieList;
     Context context;
+    int index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,9 @@ public class DetailsView extends AppCompatActivity {
 
         Intent intent = getIntent();
         movieList = (ArrayList)intent.getSerializableExtra("movieList");
+        if ((int)intent.getSerializableExtra("index") != -1) {
+            int index = (int) intent.getSerializableExtra("index");
+        }
 
 
       //  if (switchWatched.isChecked()) {}
