@@ -15,4 +15,8 @@ public class MovieListActivity implements Serializable {
 
     ArrayList<MovieListActivity> entryList;
     LinearLayout listLayout;
+
+
+
+
 }
