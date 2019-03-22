@@ -42,7 +42,7 @@ public class AddMovieActivity extends AppCompatActivity {
                 MovieEntry movieEntry = new MovieEntry();
                 movieEntry.setId(MovieEntryRepo.getIndex());
                 movieEntry.setTitle(titleField.getText().toString());
-               // movieEntry.setWatched(watchedSwitch.isChecked());
+                movieEntry.setWatched(watchedSwitch.isChecked());
 
                 MovieEntryRepo.addToMovieList(movieEntry);
 
@@ -64,19 +64,5 @@ public class AddMovieActivity extends AppCompatActivity {
     public void editMovieEntry(MovieEntry entry){
         titleField.setText(entry.getTitle());
         watchedSwitch.setChecked(entry.isWatched());
-
-      //  addEntry(entry);
-    }
-
-    public void addEntry(){
-
-    }
-
-    public void addEntry(MovieEntry entry){
-
-    }
-
-    public void removeEntry(){
-
     }
 }

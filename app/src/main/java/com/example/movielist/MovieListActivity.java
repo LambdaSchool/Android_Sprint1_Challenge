@@ -15,6 +15,7 @@ import android.widget.TextView;
 public class MovieListActivity extends AppCompatActivity {
 
     public static final int NEW_ENTRY_REQUEST = 2;
+    public int DELETE_INDEX = 0;
     Button buttonAdd;
     LinearLayout ll;
     Context context;
@@ -44,6 +45,7 @@ public class MovieListActivity extends AppCompatActivity {
             if(data != null){
                 MovieEntry entry = (MovieEntry) data.getSerializableExtra(MovieEntry.TAG);
                 MovieEntryRepo.addToMovieList(entry);
+                MovieEntryRepo.removeFromList(DELETE_INDEX);
             }
         }
     }
@@ -57,21 +59,22 @@ public class MovieListActivity extends AppCompatActivity {
     }
 
     public TextView createTextView(final MovieEntry entry){
-        TextView tv = new TextView(context);
+        final TextView tv = new TextView(context);
         tv.setText(entry.getTitle());
         tv.setPadding(15,7,15,7);
         tv.setTextSize(24);
         tv.setId(entry.getId());
-      //  if(entry.isWatched()){
-        //    tv.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-       // }
+        if(entry.isWatched()){
+            tv.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        }
 
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context,AddMovieActivity.class);
                 intent.putExtra(MovieEntry.TAG, entry);
-                //ll.removeView(tv);
+                ll.removeView(tv);
+                DELETE_INDEX = entry.getId();
                 startActivity(intent);
             }
         });

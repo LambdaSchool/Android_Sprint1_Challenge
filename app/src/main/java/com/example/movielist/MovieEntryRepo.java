@@ -19,6 +19,15 @@ public class MovieEntryRepo {
         return movieList.get(id);
     }
 
+    public static void removeFromList(int id){
+        for(MovieEntry entry : movieList)
+        {
+            if(entry.getId() == id){
+                movieList.remove(entry);
+            }
+        }
+    }
+
     public static void addToMovieList(MovieEntry entry){
         movieList.add(entry);
         INDEX++;
