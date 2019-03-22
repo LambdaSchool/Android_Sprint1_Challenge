@@ -42,7 +42,7 @@ public class editList extends AppCompatActivity {
 
                 intent = new Intent(context, MainActivity.class);
                 intent.putExtra("movie", movie);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
     }

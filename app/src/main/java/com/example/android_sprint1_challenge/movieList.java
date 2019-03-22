@@ -4,15 +4,20 @@ import android.content.Intent;
 
 import java.util.ArrayList;
 
-public class movieList {
+public class movieList
+{
 
-    ArrayList<movieModel> movieModelList;
+    ArrayList<movieModel> movies;
 
+    public movieList(ArrayList<movieModel> movies) {
+        this.movies = movies;
+    }
 
-    //Intent intentEdit = getIntent();
+    public ArrayList<movieModel> getMovies() {
+        return movies;
+    }
 
-
-    public movieList(ArrayList<movieModel> movieModelList) {
-        this.movieModelList = movieModelList;
+    public void setMovies(ArrayList<movieModel> movies) {
+        this.movies = movies;
     }
 }
