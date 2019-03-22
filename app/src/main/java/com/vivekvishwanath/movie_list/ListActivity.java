@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class ListActivity extends AppCompatActivity {
@@ -24,6 +26,11 @@ public class ListActivity extends AppCompatActivity {
     public static final int EDIT_IMAGE_REQUEST =3;
 
     private ArrayList<Movie> movies;
+    private ArrayList<TextView> movieViews;
+
+    private int currentIndex;
+
+    private int movieIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +39,7 @@ public class ListActivity extends AppCompatActivity {
         context = this;
 
         movies = new ArrayList<>();
+        movieViews = new ArrayList<>();
 
         addMovieButton = findViewById(R.id.add_movie_button);
         movieListView = findViewById(R.id.movie_list_view);
@@ -51,9 +59,21 @@ public class ListActivity extends AppCompatActivity {
             if (data != null) {
                 Movie newMovie = (Movie) data.getSerializableExtra(Movie.MOVIE_TAG);
                 if (newMovie.getMovieTitle() != null) {
+                    newMovie.setMovieId(movieIndex++);
                     movies.add(newMovie);
-                    movieListView.addView(createMovieView(newMovie));
+                    TextView newMovieView = createMovieView(newMovie);
+                    movieListView.addView(newMovieView);
+                    movieViews.add(newMovieView);
                 }
+            }
+        }
+
+        if (resultCode == Activity.RESULT_OK && requestCode == EDIT_IMAGE_REQUEST) {
+            if (data != null) {
+                Movie movie = (Movie) data.getSerializableExtra(Movie.MOVIE_TAG);
+                movies.set(movie.getMovieId(), movie);
+                movieViews.get(movie.getMovieId()).setText(movie.getMovieTitle());
+                movieViews.set(movie.getMovieId(), createMovieView(movie));
             }
         }
     }
