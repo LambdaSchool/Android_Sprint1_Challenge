@@ -1,3 +1,5 @@
+Spencer Stock test
+
 # Android_Sprint1_Challenge
 
 ## Introduction
