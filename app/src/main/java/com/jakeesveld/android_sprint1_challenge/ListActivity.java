@@ -74,14 +74,16 @@ public class ListActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == MOVIE_REQUEST_CODE) {
-            Movies movie = (Movies) data.getSerializableExtra("movie");
-            if((Boolean) data.getSerializableExtra("add")){
-                moviesList.add(movie);
-            }else if (!(Boolean) data.getSerializableExtra("add")){
-                Movies returnedMovie = (Movies) data.getSerializableExtra("movie");
-                for(Movies selectedMovie: moviesList){
-                    if (selectedMovie.getTitle().equals(returnedMovie.getTitle())){
-                        moviesList.remove(selectedMovie);
+            if (data != null) {
+                Movies movie = (Movies) data.getSerializableExtra("movie");
+                if ((Boolean) data.getSerializableExtra("add")) {
+                    moviesList.add(movie);
+                } else if (!(Boolean) data.getSerializableExtra("add")) {
+                    Movies returnedMovie = (Movies) data.getSerializableExtra("movie");
+                    for (Movies selectedMovie : moviesList) {
+                        if (selectedMovie.getTitle().equals(returnedMovie.getTitle())) {
+                            moviesList.remove(selectedMovie);
+                        }
                     }
                 }
             }

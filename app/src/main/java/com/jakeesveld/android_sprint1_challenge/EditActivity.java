@@ -21,7 +21,6 @@ public class EditActivity extends AppCompatActivity {
     Boolean isWatched;
     Context context;
     public final int MOVIE_REQUEST_CODE = 1;
-    String newMovieTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +49,7 @@ public class EditActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                newMovieTitle = textEditTitle.getText().toString();
+                newMovie.setTitle(textEditTitle.getText().toString());
             }
         });
 
@@ -58,9 +57,9 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
-                    isWatched = true;
+                    newMovie.setWatched(true);
                 }else{
-                    isWatched =false;
+                    newMovie.setWatched(false);
                 }
             }
         });
@@ -70,9 +69,6 @@ public class EditActivity extends AppCompatActivity {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                newMovie.setTitle(newMovieTitle);
-                newMovie.setWatched(isWatched);
                 intent.putExtra("movie", newMovie);
                 intent.putExtra("add", true);
                 setResult(MOVIE_REQUEST_CODE, intent);
@@ -83,8 +79,6 @@ public class EditActivity extends AppCompatActivity {
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                newMovie.setTitle(newMovieTitle);
-                newMovie.setWatched(isWatched);
                 intent.putExtra("movie", newMovie);
                 intent.putExtra("add", false);
                 setResult(MOVIE_REQUEST_CODE, intent);
