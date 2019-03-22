@@ -8,30 +8,50 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import java.io.Serializable;
+import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Serializable {
+
     public static final int MOVIE_REQUEST_CODE = 50;
+    public static final int EDIT_REQUEST_CODE = 67;
+    private int nextId = 0;
+    ArrayList<Movie> movieList;
     Context context;
+    LinearLayout listLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context = this;
 
+        listLayout = findViewById(R.id.movie_list);
 
-        ((Button)findViewById(R.id.button_add_movie)).setOnClickListener(new View.OnClickListener() {
+
+        findViewById(R.id.button_add_movie).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, EditActivity.class);
-                Movie movie = new Movie(Movie.INVALID_ID);
-                intent.putExtra(EditActivity.MOVIE_KEY, movie);
+                Movie movie = new Movie(nextId);
+                intent.putExtra(Movie.TAG, movie);
                 startActivityForResult(intent, MOVIE_REQUEST_CODE);
             }
         });
+
+        movieList = new ArrayList<>();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        listLayout.removeAllViews();
+        for(Movie movieEntry : movieList) {
+            listLayout.addView(genTextView(movieEntry));
+        }
     }
 
     @Override
@@ -39,20 +59,38 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK && requestCode == MOVIE_REQUEST_CODE) {
             if(data != null) {
-                Movie movie = (Movie) data.getSerializableExtra(EditActivity.MOVIE_KEY);
-                MovieRepo.addMovie(movie);
+                Movie movieEntry = (Movie) data.getSerializableExtra(Movie.TAG);
+                movieList.add(movieEntry);
+            }
+        }else if(requestCode == EDIT_REQUEST_CODE) {
+            if(data != null){
+                Movie movieEntry = (Movie) data.getSerializableExtra(Movie.TAG);
+                movieList.set(movieEntry.getId(), movieEntry);
             }
         }
     }
 
-    private TextView genTextView(Movie movie) {
+    private TextView genTextView(final Movie movieEntry) {
         TextView view = new TextView(context);
-        view.setText(movie.getTitle());
+        view.setPadding(15,15,15,15);
+        view.setText(movieEntry.getTitle());
         view.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
 
-        if(movie.isWatched()) {
+        if(movieEntry.isWatched()) {
+            view.setText(movieEntry.getTitle());
             view.setPaintFlags(view.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, EditActivity.class);
+                intent.putExtra(Movie.TAG, movieEntry);
+                startActivityForResult(intent, EDIT_REQUEST_CODE);
+                //TODO remove movie from list, then re-add it. Won't have to check for duplicates
+
+            }
+        });
 
         return view;
     }
