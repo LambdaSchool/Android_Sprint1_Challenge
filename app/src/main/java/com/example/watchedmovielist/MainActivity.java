@@ -3,6 +3,7 @@ package com.example.watchedmovielist;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Movie;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     Context context;
-    ArrayList<MovieListing> movies = new ArrayList<MovieListing>();
+    MovieRepository movies = new MovieRepository() ;
     LinearLayout lineMan;
     public Button addBttn;
 
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         lineMan.removeAllViews();
-        for(MovieListing m:movies) {
+        for(MovieListing m:movies.getMovies()) {
             TextView t = createMovieView(m);
             Log.i("Debug", "Added view for " + m.getName());
             lineMan.addView(t);
