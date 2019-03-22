@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".DetailsView">
 
-</android.support.constraint.ConstraintLayout>
+    <EditText
+        android:hint="Movie Name"
+        android:layout_width="match_parent"
+        android:layout_height="40sp" />
+
+    <Button
+        android:text="SAVE"
+        android:id="@+id/button_save"
+        android:layout_width="match_parent"
+        android:layout_height="40sp" />
+
+    <Button
+        android:text="DELETE"
+        android:id="@+id/button_delete"
+        android:layout_width="match_parent"
+        android:layout_height="40sp" />
+
+    <Switch
+        android:text="watched"
+        android:id="@+id/switch_watched"
+        android:layout_width="match_parent"
+        android:layout_height="40sp" />
+
+</LinearLayout>

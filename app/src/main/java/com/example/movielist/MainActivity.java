@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         addMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, MovieData.class);
+                Intent intent = new Intent(context, DetailsView.class);
                 intent.putExtra("movieList", movieList);
                 startActivity(intent);
             }
