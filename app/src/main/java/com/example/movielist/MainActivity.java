@@ -1,5 +1,6 @@
 package com.example.movielist;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,20 +12,21 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<MovieData> movieList = new ArrayList<>();
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = this;
         setContentView(R.layout.activity_main);
 
         Button addMovie = findViewById(R.id.button_add_movie);
         addMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
+                Intent intent = new Intent(context, MovieData.class);
                 intent.putExtra("movieList", movieList);
-                startActivity();
-
+                startActivity(intent);
             }
         });
 
