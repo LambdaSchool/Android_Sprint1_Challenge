@@ -58,7 +58,7 @@ public class ListActivity extends AppCompatActivity {
         super.onResume();
 
         movieListView.removeAllViews();
-        
+
         for (TextView movieView : movieViews) {
             movieListView.addView(movieView);
         }
@@ -85,6 +85,16 @@ public class ListActivity extends AppCompatActivity {
                 TextView editedMovieView = createMovieView(editedMovie);
                 movieViews.set(editedMovie.getMovieId(), editedMovieView);
             }
+        }
+
+        if (resultCode == Activity.RESULT_CANCELED && requestCode == EDIT_IMAGE_REQUEST){
+            Movie deletedMovie = (Movie) data.getSerializableExtra(Movie.MOVIE_TAG);
+            movies.remove(deletedMovie.getMovieId());
+            movieViews.remove(deletedMovie.getMovieId());
+             for (int i = deletedMovie.getMovieId(); i < movies.size(); i++) {
+                movies.get(i).setMovieId(i);
+            }
+
         }
     }
 

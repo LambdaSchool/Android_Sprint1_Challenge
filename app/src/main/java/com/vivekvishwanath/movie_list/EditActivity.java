@@ -68,6 +68,16 @@ public class EditActivity extends AppCompatActivity {
                 onSavePressed(movie);
             }
         });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent saveIntent = new Intent();
+                saveIntent.putExtra(Movie.MOVIE_TAG, movie);
+                setResult(Activity.RESULT_CANCELED, saveIntent);
+                finish();
+            }
+        });
     }
 
     protected void onSavePressed(Movie movie) {
