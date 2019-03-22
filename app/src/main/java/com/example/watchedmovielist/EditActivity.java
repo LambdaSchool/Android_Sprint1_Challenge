@@ -43,7 +43,7 @@ public class EditActivity extends AppCompatActivity {
         saver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent viewDetailIntent = new Intent(context, MainActivity.class);
+                Intent viewDetailIntent = new Intent();
                 movie = new MovieListing(editTextView.getText().toString(), watchedFlag.isChecked());
                 viewDetailIntent.putExtra("KEY", movie);
                setResult(Activity.RESULT_OK,  viewDetailIntent);
@@ -54,7 +54,7 @@ public class EditActivity extends AppCompatActivity {
         ender.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent viewDetailIntent = new Intent(context, MainActivity.class);
+                Intent viewDetailIntent = new Intent();
                 startActivity(viewDetailIntent);
                 setResult(Activity.RESULT_CANCELED, viewDetailIntent);
                 finish();

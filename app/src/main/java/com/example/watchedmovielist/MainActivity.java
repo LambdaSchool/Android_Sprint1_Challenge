@@ -3,8 +3,10 @@ package com.example.watchedmovielist;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -15,24 +17,30 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     Context context;
     ArrayList<MovieListing> movies = new ArrayList<MovieListing>();
-    private Button addBttn;
+    LinearLayout lineMan;
+    public Button addBttn;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        MovieListing movie = (MovieListing)data.getSerializableExtra("KEY");
+
+        if(movie != null) {
+            movies.add(movie);
+            Log.i("Debug", "Added movie: " + movie.getName());
+        }
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
-        LinearLayout l = (LinearLayout) findViewById(R.id.line_man);
 
-        Intent i = getIntent();
-        MovieListing movie = (MovieListing)i.getSerializableExtra("KEY");
-
-        if(movie != null) {
-            movies.add(movie);
-        }
-
-        l.removeAllViews();
+        lineMan.removeAllViews();
         for(MovieListing m:movies) {
             TextView t = createMovieView(m);
-            l.addView(t);
+            Log.i("Debug", "Added view for " + m.getName());
+            lineMan.addView(t);
         }
 
     }
@@ -44,14 +52,14 @@ public class MainActivity extends AppCompatActivity {
 
         context = this;
 
-
+        lineMan = (LinearLayout) findViewById(R.id.line_man);
 
         addBttn = findViewById(R.id.add_movie);
         addBttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, EditActivity.class);
-                startActivity(i);
+                startActivityForResult(i, 0);
             }
         });
 
@@ -71,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView createMovieView(final MovieListing m){
         TextView view = new TextView(context);
         view.setText(m.getName());
+        view.setPadding(12,12,12,12);
+        view.setTextSize(22);
         if(m.isWatched()) {
             view.setPaintFlags(view.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
@@ -81,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent detailsActivityIntent = new Intent(context, EditActivity.class);
                 detailsActivityIntent.putExtra("KEY",m);
                 movies.remove(m);
-                startActivity(detailsActivityIntent);
+                startActivityForResult(detailsActivityIntent, 0);
             }
         });
         return view;
