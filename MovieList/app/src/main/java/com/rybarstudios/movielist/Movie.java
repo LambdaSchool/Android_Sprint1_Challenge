@@ -3,6 +3,7 @@ package com.rybarstudios.movielist;
 import java.io.Serializable;
 
 public class Movie implements Serializable {
+    public static final int INVALID_ID = -1;
     private String title;
     private boolean watched;
     private int id;

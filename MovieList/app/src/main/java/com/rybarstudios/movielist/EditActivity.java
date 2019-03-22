@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 public class EditActivity extends AppCompatActivity {
 
+    public static final String MOVIE_KEY = "movieKey";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
