@@ -29,6 +29,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
             movie = new Movie("", false);
         }
 
+        // name
         EditText movieNameEditText = findViewById(R.id.edit_text_movie_name);
         movieNameEditText.setText(movie.getName());
         movieNameEditText.addTextChangedListener(new TextWatcher() {
@@ -48,6 +49,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
             }
         });
 
+        // isWatched
         Switch isWatchedSwitch = findViewById(R.id.switch_is_watched);
         isWatchedSwitch.setChecked(movie.isWatched());
         isWatchedSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -57,6 +59,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
             }
         });
 
+        // delete
         Button deleteButton = findViewById(R.id.button_delete);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +72,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
             }
         });
 
+        // save
         Button saveButton = findViewById(R.id.button_save);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override

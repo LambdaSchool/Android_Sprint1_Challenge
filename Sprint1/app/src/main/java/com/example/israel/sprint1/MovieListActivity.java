@@ -1,6 +1,7 @@
 package com.example.israel.sprint1;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -72,7 +73,7 @@ public class MovieListActivity extends AppCompatActivity {
         newTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25.f);
         // draw a strike-through if this movie has been watched
         if (movie.isWatched()) {
-            // @TODO
+            newTextView.setPaintFlags(newTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
 
         movieListLinearLayout.addView(newTextView);
