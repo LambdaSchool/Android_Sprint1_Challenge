@@ -6,6 +6,22 @@ public class MovieListing implements Serializable {
     String name = "";
     boolean watched = false;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isWatched() {
+        return watched;
+    }
+
+    public void setWatched(boolean watched) {
+        this.watched = watched;
+    }
+
     public MovieListing(String name, boolean watched) {
         this.name = name;
         this.watched = watched;
