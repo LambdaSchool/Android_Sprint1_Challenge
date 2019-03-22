@@ -24,6 +24,25 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayout l = (LinearLayout) findViewById(R.id.line_man);
 
+        Intent i = getIntent();
+        MovieListing movie = (MovieListing)i.getSerializableExtra("KEY");
+
+         if(movie != null) {
+             movies.add(movie);
+         }
+        
+        /* if(movie != null) {
+
+            editTextView.setText(movie.getName());
+            watchedFlag.setChecked(movie.isWatched());
+        }
+        */
+        for(MovieListing m:movies) {
+            TextView t = createMovieView(m);
+            l.addView(t);
+        }
+
+
     }
 
     private TextView createMovieView(final MovieListing m){
@@ -37,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent detailsActivityIntent = new Intent(context, EditActivity.class);
-                detailsActivityIntent.putExtra("KEY",movies);
+                detailsActivityIntent.putExtra("KEY",m);
+                movies.remove(m);
                 startActivity(detailsActivityIntent);
             }
         });
