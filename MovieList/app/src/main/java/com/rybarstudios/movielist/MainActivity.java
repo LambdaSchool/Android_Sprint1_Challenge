@@ -60,14 +60,14 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         if(resultCode == RESULT_OK && requestCode == MOVIE_REQUEST_CODE) {
             if(data != null) {
                 Movie movieEntry = (Movie) data.getSerializableExtra(Movie.TAG);
-                movieList.add(movieEntry);
+                movieList = addMovie(movieEntry);
             }
-        }else if(requestCode == EDIT_REQUEST_CODE) {
+        }/*else if(requestCode == EDIT_REQUEST_CODE) {
             if(data != null){
                 Movie movieEntry = (Movie) data.getSerializableExtra(Movie.TAG);
                 movieList.set(movieEntry.getId(), movieEntry);
             }
-        }
+        }*/
     }
 
     private TextView genTextView(final Movie movieEntry) {
@@ -88,12 +88,31 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 intent.putExtra(Movie.TAG, movieEntry);
                 startActivityForResult(intent, EDIT_REQUEST_CODE);
                 //TODO remove movie from list, then re-add it. Won't have to check for duplicates
-                movieList.remove(movieEntry);
+                deleteMovie(movieEntry);
                 //TODO: fix crash when list is empty after user delete
 
             }
         });
 
         return view;
+    }
+
+    public  ArrayList<Movie> addMovie(Movie movie){
+        if(movie.getId() == Movie.INVALID_ID) {
+            int movieIndex = movieList.size();
+            movie.setId((movieIndex));
+        }
+        movieList.add(movie);
+        return movieList;
+    }
+
+
+    public ArrayList<Movie> deleteMovie(Movie movie) {
+        for (int i = 0; i < movieList.size(); i++) {
+            if (movieList.get(i).getId() == Movie.INVALID_ID) {
+                movieList.remove(movie);
+            }
+        }
+        return movieList;
     }
 }
