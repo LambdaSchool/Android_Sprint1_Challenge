@@ -29,17 +29,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent saveMovie =getIntent();
-        saveMovie.getExtras();
-        String movieName = saveMovie.getStringExtra("movieName");
+        MovieStatus newMovie = (MovieStatus) saveMovie.getSerializableExtra("newmovie");
+        String movieName = newMovie.getMovieName();
+        Boolean isViewed = newMovie.isViewed();
 
 
-        if(movieName != null){
-            movieArray.add(movieName);
+
+        if(movieName != null)
+        {
+            layoutLinear.removeAllViews();
             int listIndex = movieArray.indexOf(movieName);
             String storedMovieName = movieArray.get(listIndex).toString();
-            Boolean isViewed = (Boolean) saveMovie.getSerializableExtra("watched");
-            createTextView(storedMovieName,listIndex, isViewed);
+
+            MovieStatus movie = new MovieStatus(movieName, isViewed);
+            movieArray.add(movie);
         }
+        for(int i = 0; i < movieArray.size(); ++i){
+            MovieStatus listedMovie = (MovieStatus) movieArray.get(i);
+            String listedMovieName = listedMovie.getMovieName();
+            Boolean listedMovieWatched = listedMovie.isViewed();
+            createTextView(listedMovieName, i, listedMovieWatched);
+        }
+
+
+
+
 
         addButton = findViewById(R.id.button_add_movie);
         context = this;
