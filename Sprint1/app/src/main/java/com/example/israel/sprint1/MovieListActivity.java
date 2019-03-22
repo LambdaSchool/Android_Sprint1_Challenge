@@ -27,7 +27,10 @@ public class MovieListActivity extends AppCompatActivity {
         addMovieButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // @TODO
+                Intent intent = new Intent(MovieListActivity.this, MovieDetailsActivity.class);
+                // adding a movie
+                startActivity(intent);
+
             }
         });
 
