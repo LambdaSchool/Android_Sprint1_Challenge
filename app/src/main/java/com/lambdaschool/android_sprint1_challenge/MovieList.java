@@ -46,7 +46,7 @@ public class MovieList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MovieEdit.class);
-                intent.putExtra("movie", 0);
+                intent.putExtra("movie", new Movie());
                 startActivity(intent);
             }
         });
