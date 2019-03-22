@@ -47,8 +47,10 @@ public class ListActivity extends AppCompatActivity {
         super.onResume();
         layoutList.removeAllViews();
         ArrayList<Movies> moviesList = MoviesRepository.getMoviesList();
-        for(Movies allmovies: moviesList) {
-            layoutList.addView(createMovieView(allmovies));
+        if(moviesList != null) {
+            for (Movies allmovies : moviesList) {
+                layoutList.addView(createMovieView(allmovies));
+            }
         }
 
     }
