@@ -38,9 +38,9 @@ public class MovieListActivity extends AppCompatActivity {
             }
         });
 
-        // create dummy movies
-        createTextView(new Movie("Dino", true));
-        createTextView(new Movie("Dragon", false));
+//        // create dummy movies
+//        createTextView(new Movie("Dino", true));
+//        createTextView(new Movie("Dragon", false));
 
     }
 
@@ -55,7 +55,6 @@ public class MovieListActivity extends AppCompatActivity {
         switch (requestCode) {
             case REQUEST_CODE_MOVIE_EDIT: {
                 if (resultCode == RESULT_CODE_MOVIE_EDIT_SAVE) {
-                    // @TODO create movie textView
                     Movie movie = (Movie)intent.getSerializableExtra(MOVIE_KEY);
                     if (movie != null) {
                         createTextView(movie);
