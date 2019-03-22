@@ -2,6 +2,7 @@ package com.jakeesveld.android_sprint1_challenge;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -24,5 +25,11 @@ public class EditActivity extends AppCompatActivity {
         switchWatched = findViewById(R.id.switch_watched);
 
 
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 }
