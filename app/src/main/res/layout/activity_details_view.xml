@@ -8,6 +8,7 @@
     tools:context=".DetailsView">
 
     <EditText
+        android:id="@+id/edit_text_title"
         android:hint="Movie Name"
         android:layout_width="match_parent"
         android:layout_height="40sp" />
