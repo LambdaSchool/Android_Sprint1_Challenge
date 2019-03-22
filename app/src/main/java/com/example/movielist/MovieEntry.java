@@ -1,7 +1,10 @@
 package com.example.movielist;
 
-public class MovieEntry {
+import java.io.Serializable;
+
+public class MovieEntry implements Serializable {
     private int id;
+    public static final String TAG = "MovieEntry";
     private String title;
     private boolean isWatched;
 

@@ -31,7 +31,7 @@ public class AddMovieActivity extends AppCompatActivity {
 
         Intent intent = this.getIntent();
         if(intent.getExtras() != null){
-            editMovieEntry(MovieEntryRepo.getMovieEntry(intent.getIntExtra("keyMovieClick",0)));
+            editMovieEntry((MovieEntry) intent.getSerializableExtra(MovieEntry.TAG));
         }
 
 

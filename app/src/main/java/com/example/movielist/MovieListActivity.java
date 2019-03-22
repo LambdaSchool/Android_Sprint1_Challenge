@@ -46,7 +46,7 @@ public class MovieListActivity extends AppCompatActivity {
 
     }
 
-    public TextView createTextView(MovieEntry entry){
+    public TextView createTextView(final MovieEntry entry){
         TextView tv = new TextView(context);
         tv.setText(entry.getTitle());
         tv.setPadding(15,7,15,7);
@@ -60,7 +60,7 @@ public class MovieListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context,AddMovieActivity.class);
-                intent.putExtra("key", tv.getId());
+                intent.putExtra(MovieEntry.TAG, entry);
                 //ll.removeView(tv);
                 startActivity(intent);
             }
