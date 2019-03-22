@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MovieList</string>
+    <string name="add_movie">Add Movie</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="watched">Watched</string>
+    <string name="movie_hint">Enter a movie title:</string>
+</resources>
