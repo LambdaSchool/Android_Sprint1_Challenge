@@ -1,6 +1,8 @@
 package com.example.android_sprint1_challenge;
 
-public class movieModel
+import java.io.Serializable;
+
+public class movieModel implements Serializable
 {
     private int index;
     private  String title;

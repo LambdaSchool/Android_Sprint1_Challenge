@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     Button addButton;
     Context context;
+    final ArrayList<movieModel> movies = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +31,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
 
             }
+
         });
+
+        Intent finalIntent = getIntent();
+        movieModel serialisedMovieIntent = (movieModel) finalIntent.getSerializableExtra("movie");
+
+        movies.add(serialisedMovieIntent);
+
+
+
 
 
 
     }
+
+
 }
