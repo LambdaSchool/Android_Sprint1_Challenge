@@ -13,6 +13,8 @@ import android.widget.Switch;
 
 public class MovieDetailsActivity extends AppCompatActivity {
 
+    private Movie movie;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +22,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        Movie movie = (Movie)intent.getSerializableExtra(MovieListActivity.MOVIE_KEY);
+        movie = (Movie)intent.getSerializableExtra(MovieListActivity.MOVIE_KEY);
 
         // adding a movie
         if (movie == null) {
@@ -36,7 +38,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                movie.setName(s.toString());
             }
 
             @Override
@@ -49,7 +51,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         isWatchedSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+                movie.setWatched(isChecked);
             }
         });
 
