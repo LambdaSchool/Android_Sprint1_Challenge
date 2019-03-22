@@ -36,6 +36,12 @@ public class EditActivity extends AppCompatActivity {
         context = this;
         isWatched = false;
 
+
+
+        if (newMovie.getTitle() != ""){
+            textEditTitle.setText(newMovie.getTitle());
+        }
+
         textEditTitle.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -64,6 +70,10 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
+        if (newMovie.getWatched()){
+            switchWatched.setChecked(true);
+        }
+
 
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +81,7 @@ public class EditActivity extends AppCompatActivity {
             public void onClick(View v) {
                 intent.putExtra("movie", newMovie);
                 intent.putExtra("add", true);
-                setResult(MOVIE_REQUEST_CODE, intent);
+                setResult(RESULT_OK, intent);
                 finish();
             }
         });
@@ -81,7 +91,7 @@ public class EditActivity extends AppCompatActivity {
             public void onClick(View v) {
                 intent.putExtra("movie", newMovie);
                 intent.putExtra("add", false);
-                setResult(MOVIE_REQUEST_CODE, intent);
+                setResult(RESULT_OK, intent);
                 finish();
 
             }

@@ -14,9 +14,10 @@ public class Movies implements Serializable {
         this.isWatched = isWatched;
     }
 
-    public Movies(){
+    public Movies(int id){
         this.title = "";
         this.isWatched = false;
+        this.id = id;
     }
 
     public String getTitle() {
@@ -34,4 +35,6 @@ public class Movies implements Serializable {
     public void setWatched(Boolean watched) {
         isWatched = watched;
     }
+
+    public int getId(){ return id; }
 }
