@@ -21,10 +21,9 @@ public class MovieListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        context = this;
-
+        context   = this;
         buttonAdd = findViewById(R.id.add_button);
-        ll = findViewById(R.id.ll_scrollview);
+        ll        = findViewById(R.id.ll_scrollview);
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,14 +35,23 @@ public class MovieListActivity extends AppCompatActivity {
     }
 
     public TextView createTextView(MovieEntry entry){
-        TextView tv = new TextView(context);
+        final TextView tv = new TextView(context);
         tv.setText(entry.getTitle());
         tv.setPadding(15,7,15,7);
         tv.setTextSize(24);
+        tv.setId(entry.getId());
         if(entry.isWatched()){
             tv.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         }
 
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,AddMovieActivity.class);
+                intent.putExtra("key", tv.getId());
+                startActivity(intent);
+            }
+        });
         return tv;
     }
 }
