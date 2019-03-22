@@ -29,12 +29,18 @@ public class DetailsView extends AppCompatActivity {
 
         Intent intent = getIntent();
         movieList = (ArrayList)intent.getSerializableExtra("movieList");
-        if ((int)intent.getSerializableExtra("index") != -1) {
-            int index = (int) intent.getSerializableExtra("index");
+        //checks if you came here by way of the list, or the button
+        final int index = (int) intent.getSerializableExtra("index");
+        if (index != -1) {
+            MovieData temp = movieList.get(index);
+
+            //populating view if you came here via list
+            editTextTitle.setText(temp.getTitle());
+            switchWatched.setChecked(temp.isWatched());
         }
 
 
-      //  if (switchWatched.isChecked()) {}
+
 
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,11 +51,15 @@ public class DetailsView extends AppCompatActivity {
                         switchWatched.isChecked(),
                         movieList.size()
                 );
-                movieList.add (temp);
-                Intent intent = new Intent(context, MainActivity.class);
-                intent.putExtra("movieList", movieList);
-                startActivity(intent);
-
+                if (index != -1) { //execute if it's a previously saved movie
+                    movieList.set(index,temp);
+                }
+                else { //execute if it's a new movie
+                    movieList.add(temp);
+                }
+                    Intent intent = new Intent(context, MainActivity.class);
+                    intent.putExtra("movieList", movieList);
+                    startActivity(intent);
             }
         });
     }
