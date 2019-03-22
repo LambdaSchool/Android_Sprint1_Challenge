@@ -1,7 +1,9 @@
 package com.example.watchedmovielist;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Movie;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -44,7 +46,8 @@ public class EditActivity extends AppCompatActivity {
                 Intent viewDetailIntent = new Intent(context, MainActivity.class);
                 movie = new MovieListing(editTextView.getText().toString(), watchedFlag.isChecked());
                 viewDetailIntent.putExtra("KEY", movie);
-                startActivity(viewDetailIntent);
+               setResult(Activity.RESULT_OK,  viewDetailIntent);
+               finish();
             }
 
         });
@@ -53,6 +56,8 @@ public class EditActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent viewDetailIntent = new Intent(context, MainActivity.class);
                 startActivity(viewDetailIntent);
+                setResult(Activity.RESULT_CANCELED, viewDetailIntent);
+                finish();
             }
         }));
 
