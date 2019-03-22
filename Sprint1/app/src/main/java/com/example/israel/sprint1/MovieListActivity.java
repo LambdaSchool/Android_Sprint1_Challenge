@@ -23,8 +23,6 @@ public class MovieListActivity extends AppCompatActivity {
 
     private LinearLayout movieListLinearLayout;
 
-    private ArrayList<Movie> movieArrayList = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +43,12 @@ public class MovieListActivity extends AppCompatActivity {
 //        // create dummy movies
 //        addMovie(new Movie("Dino", true));
 //        addMovie(new Movie("Dragon", false));
+
+        // populate movie lists of movies from the repo
+        ArrayList<Movie> movies = MovieRepository.getMovies();
+        for (Movie movie : movies) {
+            addMovie(movie);
+        }
 
     }
 
@@ -69,7 +73,7 @@ public class MovieListActivity extends AppCompatActivity {
     }
 
     private void addMovie(Movie movie) {
-        movieArrayList.add(movie);
+        MovieRepository.addMovie(movie);
         createTextView(movie);
     }
 
@@ -93,7 +97,7 @@ public class MovieListActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_CODE_MOVIE_EDIT);
 
                 // remove movie. this will be added later if it is saved
-                movieArrayList.remove(v.getTag());
+                MovieRepository.removeMovie((Movie)v.getTag());
 
                 // remove the textView
                 ViewGroup viewGroup = (ViewGroup)v.getParent();
