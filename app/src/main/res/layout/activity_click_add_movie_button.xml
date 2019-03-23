@@ -4,30 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context=".MainActivity">
 
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/list_of_movies"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/list_of_movies"
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/add_edit_movie"
+            android:layout_width="294dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/add_movie" />
+
+        <Switch
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginTop="10dp"
+            android:layout_alignRight="@+id/add_edit_movie" />
 
-            <EditText
-                android:id="@+id/add_edit_movie"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginTop="450sp"
-                android:orientation="vertical"
-                android:text="Add Movie" />
-
-        </LinearLayout>
-
-    </ScrollView>
+    </LinearLayout>
 
 </LinearLayout>
