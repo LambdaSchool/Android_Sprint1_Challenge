@@ -1,12 +1,10 @@
 package com.example.android_sprint1_challenge;
 
-import android.graphics.Movie;
-
 import java.util.ArrayList;
 
 public class MovieRepo {
-    public ArrayList<MovieStatus> allMovies = new ArrayList<>();
-    private MovieStatus addedMovie = new MovieStatus();
+    public ArrayList<MovieObject> allMovies = new ArrayList<>();
+    private MovieObject addedMovie = new MovieObject();
 
 
     public  void addMovie(String movieName, int indexValue, Boolean isViewed){
@@ -19,10 +17,10 @@ public class MovieRepo {
 
 
     }
-    public void addMovie(MovieStatus addedMovie){
+    public void addMovie(MovieObject addedMovie){
         allMovies.add(addedMovie);
     }
-    public ArrayList<MovieStatus> getAllMovies(){
+    public ArrayList<MovieObject> getAllMovies(){
         return allMovies;
     }
 

@@ -17,10 +17,34 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     Intent fullIntent;
     Button addButton;
     Context context;
-    ArrayList movieArray = new ArrayList<String>();
-    MovieObject newMovie = new MovieObject();
-    public int i;
+    MovieRepo movieArray = new MovieRepo();
+    MovieObject newMovie;
 
+
+
+    @Override
+    protected void onResume() {
+        context = this;
+        Intent saveMovie = getIntent();
+        newMovie = (MovieObject) saveMovie.getSerializableExtra("newmovie");
+        movieArray.addMovie(newMovie);
+
+//        layoutLinear.removeAllViews();
+
+
+        if(newMovie!=null) {
+            ArrayList<MovieObject> allMovies = movieArray.getAllMovies();
+            for (int i = 0 ; i < allMovies.size(); ++i) {
+                MovieObject listedMovie =  allMovies.get(i);
+                String listedMovieName = listedMovie.getMovieName();
+                Boolean listedMovieWatched = listedMovie.isViewed();
+
+                createTextView(listedMovieName, i, listedMovieWatched);
+            }
+        }
+
+        super.onResume();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,30 +52,16 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         setContentView(R.layout.activity_main);
        layoutLinear = findViewById(R.id.scroll_view);
         addButton = findViewById(R.id.button_add_movie);
-        context = this;
-
-            Intent saveMovie = getIntent();
-                newMovie = (MovieObject) saveMovie.getSerializableExtra("newmovie");
-
-                layoutLinear.removeAllViews();
 
 
-            if(newMovie!=null) {
-                movieArray.add(newMovie);
-                for (i = 0 ; i < movieArray.size(); ++i) {
-                    MovieObject listedMovie = (MovieObject) movieArray.get(i);
-                    String listedMovieName = listedMovie.getMovieName();
-                    Boolean listedMovieWatched = listedMovie.isViewed();
-                    createTextView(listedMovieName, i, listedMovieWatched);
-                }
-            }
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent addMovie = new Intent(context, MovieDetails.class);
-                int indexValue = i;
-                addMovie.putExtra("index", indexValue);
+                Intent addMovie = new Intent(MainActivity.this, MovieDetails.class);
+//                int indexValue = i;
+//                addMovie.putExtra("index", indexValue);
+//                addMovie.putExtra("movies", movieArray);
                 startActivity(addMovie);
 
 

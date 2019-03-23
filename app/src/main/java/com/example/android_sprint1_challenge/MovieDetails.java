@@ -14,12 +14,14 @@ import android.widget.Switch;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MovieDeltails extends AppCompatActivity implements Serializable {
+public class MovieDetails extends AppCompatActivity implements Serializable {
     EditText editText;
     Switch viewedSwitch;
     Button saveButton, deleteButton;
     String movieName;
     Context context = this;
+    MovieRepo newRepo = new MovieRepo();
+    ArrayList<MovieObject> movieObjectArrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +55,23 @@ public class MovieDeltails extends AppCompatActivity implements Serializable {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent saveMovies = new Intent(context, MainActivity.class);
+                Intent getData = getIntent();
+//                int movieIndex = (Integer)getData.getSerializableExtra("index");
+
+                Intent saveMovies = new Intent(MovieDetails.this , MainActivity.class);
+
+
+                MovieObject addThisMovie = new MovieObject();
+
                 Boolean switchViewed = viewedSwitch.isChecked();
+                addThisMovie.setViewed(switchViewed);
+                addThisMovie.setMovieName(movieName);
+//                addThisMovie.setIndexValue(movieIndex);
+
+                saveMovies.putExtra("newmovie", addThisMovie);
                 saveMovies.putExtra("movieName", movieName);
                 saveMovies.putExtra("watched", switchViewed);
+                movieObjectArrayList.add(addThisMovie);
                 startActivity(saveMovies);
 
             }
