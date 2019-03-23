@@ -48,6 +48,8 @@ public class MovieListActivity extends AppCompatActivity implements Serializable
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_list);
+        context = this;
+        entryList = new ArrayList<>();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -59,6 +61,9 @@ public class MovieListActivity extends AppCompatActivity implements Serializable
                 startActivityForResult(intent, ACTIVITY_REQUEST_CODE);
             }
         });
+
+
+
     }
 
 
