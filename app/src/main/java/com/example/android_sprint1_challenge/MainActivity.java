@@ -59,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
                 ArrayList<movieModel> movies = new ArrayList<>();
                 //Intent finalIntent = getIntent();
-                movieModel movie = (movieModel) getIntent().getSerializableExtra("movie");
+                //movieModel movie = (movieModel) getIntent().getSerializableExtra("movie");
+                movieModel movie = new movieModel(1,intent.getStringExtra("movie"), intent.getBooleanExtra("watched",false));
                 movies.add(movie);
                 //for (movieModel movie : movies) {
 

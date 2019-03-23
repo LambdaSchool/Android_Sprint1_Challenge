@@ -43,7 +43,9 @@ public class editList extends AppCompatActivity
                 movie = new movieModel(index++,addMovie.getText().toString(),checkWatched.isChecked());
 
                 intent = new Intent(context, MainActivity.class);
-                intent.putExtra("movie", movie);
+                //intent.putExtra("movie", movie);
+                intent.putExtra("movie", addMovie.getText().toString());
+                intent.putExtra("watched", checkWatched.isChecked());
                 setResult(RESULT_OK, intent);
                 startActivityForResult(intent, REQUEST_CODE);
                 finish();
