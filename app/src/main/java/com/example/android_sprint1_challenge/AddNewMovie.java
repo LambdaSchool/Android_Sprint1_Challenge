@@ -27,32 +27,34 @@ public class AddNewMovie extends AppCompatActivity implements Serializable {
     private String entryString;
     private ArrayList<MovieEntry> entryList ;
     Boolean switchViewed;
-
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_movie);
         viewedSwitch = findViewById(R.id.watched_switch);
-
+        movieInput = findViewById(R.id.movie_edit_text);
+        saveButton = findViewById(R.id.button_save);
+        deleteButton = findViewById(R.id.button_delete);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
         final Intent passList = getIntent();
-//    entryList = (ArrayList<MovieEntry>) passList.getSerializableExtra("movieList");
         context = this;
-        movieInput = findViewById(R.id.movie_edit_text);
+
         if (passList.getStringExtra("movieName") != null) {
             switchViewed = passList.getBooleanExtra("movieBoolean",false);
             viewedSwitch.setChecked(switchViewed);
             entryString = passList.getStringExtra("movieName");
+            id = passList.getIntExtra("movieId",1213);
             movieInput.setText(entryString);
-        } else {
 
-//            Movie input is the editText that takes the information from the listener and assignes it to entryString
+
+        }else {
+            id = 1213;
 
             movieInput.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -71,30 +73,32 @@ public class AddNewMovie extends AppCompatActivity implements Serializable {
 
                 }
             });
+
         }
 
 
-        saveButton = findViewById(R.id.button_save);
-
-//            saveButton is the button that is going to start the process of building the MovieEntry
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-//            viewedSwitch is the switch that takes viewed as true or false and returns value to switchViewed
-                switchViewed = viewedSwitch.isChecked();
-
-
-                MovieEntry entry = new MovieEntry(entryString, switchViewed);
-
-                passList.putExtra("moviename", entry.getMovieName());
-                passList.putExtra("movieboolean", entry.getViewed());
+                passList.putExtra("movieid", id);
+                passList.putExtra("moviename", entryString);
+                passList.putExtra("movieboolean", viewedSwitch.isChecked());
                 setResult(MovieListActivity.RESULT_OK, passList);
                 finish();
-
             }
         });
-        deleteButton = findViewById(R.id.button_delete);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                id = id+5000;
+                passList.putExtra("movieid", id);
+
+                setResult(MovieListActivity.RESULT_OK, passList);
+                finish();
+            }
+        });
+
 
 
     }
