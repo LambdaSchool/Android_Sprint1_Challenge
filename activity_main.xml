@@ -20,6 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="No movie was seen."
+            android:drawableTint="@android:color/darker_gray"
+            style="@android:style/TextAppearance"
              />
     </ScrollView>
 
