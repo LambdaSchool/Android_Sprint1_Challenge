@@ -2,6 +2,7 @@ package com.example.android_sprint1_challenge;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Movie;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -25,12 +26,15 @@ public class AddNewMovie extends AppCompatActivity implements Serializable {
     private MovieEntry entry;
     private String entryString;
     private ArrayList<MovieEntry> entryList ;
+    Boolean switchViewed;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_movie);
+        viewedSwitch = findViewById(R.id.watched_switch);
+
     }
 
     @Override
@@ -41,44 +45,51 @@ public class AddNewMovie extends AppCompatActivity implements Serializable {
 //    entryList = (ArrayList<MovieEntry>) passList.getSerializableExtra("movieList");
         context = this;
         movieInput = findViewById(R.id.movie_edit_text);
+        if (passList.getStringExtra("movieName") != null) {
+            switchViewed = passList.getBooleanExtra("movieBoolean",false);
+            viewedSwitch.setChecked(switchViewed);
+            entryString = passList.getStringExtra("movieName");
+            movieInput.setText(entryString);
+        } else {
+
 //            Movie input is the editText that takes the information from the listener and assignes it to entryString
-        movieInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
+            movieInput.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                }
 
-            }
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-            @Override
-            public void afterTextChanged(Editable s) {
-                entryString = s.toString();
+                }
 
-            }
-        });
+                @Override
+                public void afterTextChanged(Editable s) {
+                    entryString = s.toString();
 
+                }
+            });
+        }
 
 
         saveButton = findViewById(R.id.button_save);
+
 //            saveButton is the button that is going to start the process of building the MovieEntry
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent newCreatedMovie = new Intent(context, MovieListActivity.class);
-//                movieEntry needs id, boolean, name
-                viewedSwitch = findViewById(R.id.watched_switch);
+
 //            viewedSwitch is the switch that takes viewed as true or false and returns value to switchViewed
-                final Boolean switchViewed = viewedSwitch.isChecked();
+                switchViewed = viewedSwitch.isChecked();
 
 
                 MovieEntry entry = new MovieEntry(entryString, switchViewed);
 
                 passList.putExtra("moviename", entry.getMovieName());
                 passList.putExtra("movieboolean", entry.getViewed());
-                setResult( MovieListActivity.RESULT_OK ,  passList);
+                setResult(MovieListActivity.RESULT_OK, passList);
                 finish();
 
             }
@@ -86,14 +97,5 @@ public class AddNewMovie extends AppCompatActivity implements Serializable {
         deleteButton = findViewById(R.id.button_delete);
 
 
-
-
-
-
-
     }
-
-
-
-
 }
