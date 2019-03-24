@@ -29,7 +29,7 @@ public class AddNewMovie extends AppCompatActivity implements Serializable {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_movie);
+        setContentView(R.layout.activity_movie_deltails);
 
         movieTitleEntry = findViewById(R.id.movie_edit_text);
         watchedSwitch = findViewById(R.id.watched_switch);
