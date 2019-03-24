@@ -4,79 +4,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="bottom"
     android:orientation="horizontal"
+    android:visibility="visible"
     tools:context=".MainActivity"
     tools:ignore="ExtraText">
 
-    <![CDATA[
-
-
-        android:id="@+id/list_of_movies"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="454dp">
-
-    ]]>
 
     <EditText
         android:id="@+id/add_edit_movie"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="357dp"
-        android:layout_marginBottom="264dp"
+        android:layout_width="280dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="400dp"
         android:layout_weight="1"
         android:hint="Add Movie"
-        app:layout_constraintBottom_toTopOf="@+id/delete_button"
-        app:layout_constraintEnd_toStartOf="@+id/switch1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Switch
         android:id="@+id/switch1"
-        android:layout_width="106dp"
-        android:layout_height="0dp"
+        android:layout_width="110dp"
+        android:layout_height="46dp"
         android:layout_alignEnd="@+id/add_edit_movie"
         android:layout_alignRight="@+id/add_edit_movie"
-        android:layout_marginTop="358dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginBottom="265dp"
-        android:text="Watched"
 
-        app:layout_constraintBottom_toTopOf="@+id/save_button"
+        android:layout_marginTop="400dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Watched"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/add_edit_movie"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/save_button"
-        android:layout_width="0dp"
+        android:layout_width="195dp"
         android:layout_height="48dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="18dp"
+        android:layout_marginBottom="10dp"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/delete_button"
-        app:layout_constraintTop_toBottomOf="@+id/switch1" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/delete_button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="195dp"
+        android:layout_height="48dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginBottom="18dp"
+        android:layout_marginBottom="10dp"
         android:text="Delete"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/save_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_edit_movie" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
