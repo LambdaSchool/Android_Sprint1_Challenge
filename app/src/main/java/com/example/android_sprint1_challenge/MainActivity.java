@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.os.ConditionVariable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 class MainActivity extends AppCompatActivity {
 
@@ -17,6 +20,7 @@ class MainActivity extends AppCompatActivity {
 
     private EditText entryMovieName;
 
+    String [] movieList = //GET USER IPUT
 
 
 
@@ -33,11 +37,24 @@ class MainActivity extends AppCompatActivity {
             }
 
         });
-    }
 
+        for (String animalLoop : movieList) {
+            ((LinearLayout)findViewById(R.id.listOfMovies)).addView(genTextView(animalLoop));
+        }
+
+    }
+        //makes button clicable
     public void openActivity2() {
         Intent intent = new Intent(this, Activity2.class);
         startActivity(intent);
     }
+        //generate textview
+    public TextView genTextView(String movies){
+        TextView view = new TextView(this);
+        view.setText(movies);
+        view.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        view.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        return view;
+
 
 }
