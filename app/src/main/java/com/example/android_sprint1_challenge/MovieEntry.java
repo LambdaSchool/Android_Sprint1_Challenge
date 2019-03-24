@@ -3,50 +3,49 @@ package com.example.android_sprint1_challenge;
 import java.io.Serializable;
 
 public class MovieEntry implements Serializable {
-    public static final String TAG = "entry";
+    public static final String MOVIE_TAG = "tagThis";
 
-    public static int nextId = 0;
     private String movieName;
-    private Boolean isViewed;
-    private int id;
+    private int movieId;
+    private boolean isWatched;
 
-    public MovieEntry(int id, String movieName, Boolean isViewed){
-        this.id = id;
+
+    public MovieEntry(String movieName, int movieId, boolean isWatched) {
         this.movieName = movieName;
-        this.isViewed = isViewed;
-
+        this.movieId = movieId;
+        this.isWatched = isWatched;
     }
-    public MovieEntry(String movieName, Boolean isViewed){
-        this.movieName = movieName;
-        this.isViewed = isViewed;
 
-    }
 
     public String getMovieName() {
         return movieName;
     }
 
+    public int getMovieId() {
+        return movieId;
+    }
+
+
+
     public void setMovieName(String movieName) {
         this.movieName = movieName;
     }
 
-    public Boolean getViewed() {
-        return isViewed;
+
+    public void setMovieId(int movieId) {
+        this.movieId = movieId;
     }
 
-    public void setViewed(Boolean isViewed) {
-        this.isViewed = isViewed;
+    public boolean isWatched() {
+        return isWatched;
     }
 
-    public int getId() {
-        return id;
+    public void setWatched(boolean watched) {
+        isWatched = watched;
     }
 
-    public void setId(int id){
-        this.id = id;
+    public MovieEntry() {
+
     }
-
-
 
 }
-
