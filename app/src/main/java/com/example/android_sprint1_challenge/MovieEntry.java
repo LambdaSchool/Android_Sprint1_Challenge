@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class MovieEntry implements Serializable {
     public static final String TAG = "entry";
 
-
+    public static int nextId = 0;
     private String movieName;
     private Boolean isViewed;
     private int id;
@@ -19,6 +19,7 @@ public class MovieEntry implements Serializable {
     public MovieEntry(String movieName, Boolean isViewed){
         this.movieName = movieName;
         this.isViewed = isViewed;
+        this.id = nextId++;
     }
 
     public String getMovieName() {

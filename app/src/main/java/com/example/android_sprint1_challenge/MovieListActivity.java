@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,31 +18,34 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MovieListActivity extends AppCompatActivity implements Serializable {
+    public static final int Null_DEFAULT = 1111;
+    public static final int DELETE = 5000;
     LinearLayout listView;
     Context context;
     ArrayList<MovieEntry> entryList;
-    static int nextId = 0;
-    Intent returnedIntent;
+
     public static final int ACTIVITY_REQUEST_CODE = 1;
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(resultCode == RESULT_OK && requestCode == ACTIVITY_REQUEST_CODE){
-            if(data != null){
-                String movieName = data.getStringExtra("moviename");
-                Boolean movieViewed = data.getBooleanExtra("movieboolean", true);
-                MovieEntry newEntry = new MovieEntry(movieName,movieViewed);
-                newEntry.setId(nextId++);
-                entryList.add(newEntry);
-            }
-            if(entryList.size()>0){
-                if(listView != null){listView.removeAllViews();}
-                for(MovieEntry i: entryList){
-                    createEntryView(i);
+        if(resultCode == RESULT_OK && requestCode == ACTIVITY_REQUEST_CODE) {
+            if (data != null) {
+                if(MovieRepo.allMovies.size()>0){
+                    if(listView != null){listView.removeAllViews();}
+                    for(MovieEntry entry: MovieRepo.allMovies){
+                        createEntryView(entry);
+
+                    }
                 }
+//  entryList.set(id, newEntry);
+
+
             }
         }
+
+
+
     }
 
     @Override
@@ -49,16 +53,16 @@ public class MovieListActivity extends AppCompatActivity implements Serializable
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_list);
         context = this;
-        entryList = new ArrayList<>();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, AddNewMovie.class);
+
                 startActivityForResult(intent, ACTIVITY_REQUEST_CODE);
+
             }
         });
 
@@ -84,8 +88,10 @@ public class MovieListActivity extends AppCompatActivity implements Serializable
             @Override
             public void onClick(View v) {
                 Intent viewDetailIntent = new Intent(context, AddNewMovie.class );
-                viewDetailIntent.putExtra("movieList", entryList);
-                viewDetailIntent.putExtra(MovieEntry.TAG, entry);
+                viewDetailIntent.putExtra("textmovieName", entry.getMovieName());
+                viewDetailIntent.putExtra("textmovieId", entry.getId());
+                viewDetailIntent.putExtra("textmovieBoolean", entry.getViewed());
+                MovieRepo.allMovies.remove(entry.getId());
                 startActivity(viewDetailIntent);
             }
         });

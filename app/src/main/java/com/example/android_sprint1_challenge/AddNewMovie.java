@@ -45,16 +45,13 @@ public class AddNewMovie extends AppCompatActivity implements Serializable {
         final Intent passList = getIntent();
         context = this;
 
-        if (passList.getStringExtra("movieName") != null) {
-            switchViewed = passList.getBooleanExtra("movieBoolean",false);
-            viewedSwitch.setChecked(switchViewed);
-            entryString = passList.getStringExtra("movieName");
-            id = passList.getIntExtra("movieId",1213);
-            movieInput.setText(entryString);
+            if (passList.getStringExtra("textmovieName") != null) {
+                switchViewed = passList.getBooleanExtra("textmovieBoolean",false);
+                viewedSwitch.setChecked(switchViewed);
+                entryString = passList.getStringExtra("textmovieName");
+                id = passList.getIntExtra("textmovieId",1213);
+                movieInput.setText(entryString);        }
 
-
-        }else {
-            id = 1213;
 
             movieInput.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -74,16 +71,14 @@ public class AddNewMovie extends AppCompatActivity implements Serializable {
                 }
             });
 
-        }
+
 
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                passList.putExtra("movieid", id);
-                passList.putExtra("moviename", entryString);
-                passList.putExtra("movieboolean", viewedSwitch.isChecked());
+                MovieEntry addMovie = new MovieEntry(entryString, viewedSwitch.isChecked());
+                MovieRepo.allMovies.add(addMovie);
                 setResult(MovieListActivity.RESULT_OK, passList);
                 finish();
             }
@@ -91,8 +86,6 @@ public class AddNewMovie extends AppCompatActivity implements Serializable {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                id = id+5000;
-                passList.putExtra("movieid", id);
 
                 setResult(MovieListActivity.RESULT_OK, passList);
                 finish();
