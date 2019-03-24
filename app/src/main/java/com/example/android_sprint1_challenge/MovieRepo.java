@@ -2,11 +2,12 @@ package com.example.android_sprint1_challenge;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MovieRepo {
-    public static ArrayList<MovieEntry> allMovies = new ArrayList<>();
+    public static List<MovieEntry> allMovies = new ArrayList<>();
 
-    public ArrayList<MovieEntry> getAllMovies(){
+    public List<MovieEntry> getAllMovies(){
         return allMovies;
     }
 

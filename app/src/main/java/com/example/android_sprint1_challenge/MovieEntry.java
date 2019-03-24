@@ -19,7 +19,7 @@ public class MovieEntry implements Serializable {
     public MovieEntry(String movieName, Boolean isViewed){
         this.movieName = movieName;
         this.isViewed = isViewed;
-        this.id = nextId++;
+
     }
 
     public String getMovieName() {

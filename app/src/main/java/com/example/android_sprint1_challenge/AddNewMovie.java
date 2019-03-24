@@ -42,34 +42,19 @@ public class AddNewMovie extends AppCompatActivity implements Serializable {
     @Override
     protected void onResume() {
         super.onResume();
-        final Intent passList = getIntent();
+         Intent passList;
         context = this;
-
+        passList = getIntent();
             if (passList.getStringExtra("textmovieName") != null) {
-                switchViewed = passList.getBooleanExtra("textmovieBoolean",false);
-                viewedSwitch.setChecked(switchViewed);
-                entryString = passList.getStringExtra("textmovieName");
-                id = passList.getIntExtra("textmovieId",1213);
+                String movieName = passList.getStringExtra("textmovieName");
+                id = passList.getIntExtra("textmovieId", 0);
+                MovieRepo.allMovies.remove(id);
+                MovieEntry editMovie = MovieRepo.allMovies.get(id);
+
+                //                switchViewed = passList.getBooleanExtra("textmovieBoolean",false);
+                viewedSwitch.setChecked(editMovie.getViewed());
+                entryString = editMovie.getMovieName();
                 movieInput.setText(entryString);        }
-
-
-            movieInput.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    entryString = s.toString();
-
-                }
-            });
 
 
 
@@ -77,18 +62,19 @@ public class AddNewMovie extends AppCompatActivity implements Serializable {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent saveIntent = new Intent(context, MovieListActivity.class);
+                entryString = movieInput.getText().toString();
                 MovieEntry addMovie = new MovieEntry(entryString, viewedSwitch.isChecked());
                 MovieRepo.allMovies.add(addMovie);
-                setResult(MovieListActivity.RESULT_OK, passList);
-                finish();
+                startActivity(saveIntent);
             }
         });
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                setResult(MovieListActivity.RESULT_OK, passList);
-                finish();
+                Intent deleteIntent = new Intent(context, MovieListActivity.class);
+                MovieRepo.allMovies.remove(id);
+                startActivity(deleteIntent);
             }
         });
 
