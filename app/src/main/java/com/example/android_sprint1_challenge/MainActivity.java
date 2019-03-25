@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.ConditionVariable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -22,7 +23,7 @@ import static com.example.android_sprint1_challenge.MovieEntry.*;
 
 class MainActivity extends AppCompatActivity {
 
-
+    public static int invalidID = -1;
 
     private Button addMovieButton;
     private EditText entry;
@@ -56,11 +57,11 @@ class MainActivity extends AppCompatActivity {
         //create entry
         Intent intent = getIntent();
         entry = (EditText) intent.getSerializableExtra(MovieEntry.TAG);
-        if(entry == null) {
-            entry = new MovieEntry(MovieEntry.INVALID_ID);
-        }
+        /*if(entry == null) {
+            entry = new MovieEntry(MovieEntry,INVALID_ID);
+        }*/
 
-        //set listerner to add movie to list via edit text and save button
+        //set listener to add movie to list via edit text and save button
 
         saveMovie.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +84,36 @@ class MainActivity extends AppCompatActivity {
     }
 
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
 
 
 }
