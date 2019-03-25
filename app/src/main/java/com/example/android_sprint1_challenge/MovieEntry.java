@@ -4,16 +4,21 @@ import java.io.Serializable;
 
 public class MovieEntry implements Serializable {
 
-    public static final String TAG = "Movie Entry";
-    public static final int INVALID_ID = -1;
     private String movieName;
 
-    public MovieEntry(String movieName) {
+    private int movieNameInt;
+
+    public MovieEntry(String movieName,int movieNameInt) {
         this.movieName = movieName;
+        this.movieNameInt = movieNameInt;
     }
 
-    public MovieEntry(int id){
-        this.movieName = "";
+    public int getId() {
+        return movieNameInt;
+    }
+
+    public void setId(int id) {
+        this.movieNameInt = Integer.parseInt(movieName);
     }
 
     public String getMovieName() {
