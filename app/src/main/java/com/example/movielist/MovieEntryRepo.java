@@ -19,12 +19,26 @@ public class MovieEntryRepo {
         return movieList.get(id);
     }
 
-    public static void removeFromList(int id){
+    public static void removeFromList(int entryID){
         for(MovieEntry entry : movieList)
         {
-            if(entry.getId() == id){
-                movieList.remove(entry);
+            if(entry.getId() == entryID){
+                movieList.remove(entry.getId());
+                setIDs();
             }
+        }
+    }
+
+    public static void removeFromList(MovieEntry entry){
+        movieList.remove(entry.getId()-1);
+    }
+
+    public static void setIDs(){
+        int i = 0;
+
+        for(MovieEntry entry : movieList){
+            entry.setId(i);
+            i++;
         }
     }
 

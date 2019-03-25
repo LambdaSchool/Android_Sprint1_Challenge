@@ -22,7 +22,7 @@ public class MovieEntry implements Serializable {
 
     public boolean isWatched() {
         return isWatched;
-    }
+    }4
 
     public void setWatched(boolean watched) {
         isWatched = watched;

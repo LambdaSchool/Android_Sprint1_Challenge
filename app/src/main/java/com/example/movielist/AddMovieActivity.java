@@ -31,7 +31,8 @@ public class AddMovieActivity extends AppCompatActivity {
 
         Intent intent = this.getIntent();
         if(intent.getExtras() != null){
-            editMovieEntry((MovieEntry) intent.getSerializableExtra(MovieEntry.TAG));
+            MovieEntry entry = (MovieEntry) intent.getSerializableExtra(MovieEntry.TAG);
+            editMovieEntry(entry);
         }
 
 
@@ -47,8 +48,7 @@ public class AddMovieActivity extends AppCompatActivity {
                 MovieEntryRepo.addToMovieList(movieEntry);
 
                 Intent intent = new Intent(context, MovieListActivity.class);
-                intent.putExtra("FirstKey", "add");
-                intent.putExtra("key", movieEntry);
+                intent.putExtra(MovieEntry.TAG, movieEntry);
                 startActivity(intent);
             }
         });
@@ -56,7 +56,7 @@ public class AddMovieActivity extends AppCompatActivity {
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                finish();
             }
         });
     }

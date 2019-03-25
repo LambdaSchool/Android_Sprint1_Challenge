@@ -32,6 +32,7 @@ public class MovieListActivity extends AppCompatActivity {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ll.removeAllViews();
                 Intent intent = new Intent(context, AddMovieActivity.class);
                 startActivity(intent);
             }
@@ -45,7 +46,6 @@ public class MovieListActivity extends AppCompatActivity {
             if(data != null){
                 MovieEntry entry = (MovieEntry) data.getSerializableExtra(MovieEntry.TAG);
                 MovieEntryRepo.addToMovieList(entry);
-                MovieEntryRepo.removeFromList(DELETE_INDEX);
             }
         }
     }
@@ -53,6 +53,7 @@ public class MovieListActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+        MovieEntryRepo.removeFromList(DELETE_INDEX);
         for(MovieEntry entry : MovieEntryRepo.movieList){
             ll.addView(createTextView(entry));
         }
@@ -73,8 +74,7 @@ public class MovieListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(context,AddMovieActivity.class);
                 intent.putExtra(MovieEntry.TAG, entry);
-                ll.removeView(tv);
-                DELETE_INDEX = entry.getId();
+                MovieEntryRepo.removeFromList(entry);
                 startActivity(intent);
             }
         });
