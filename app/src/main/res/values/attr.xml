@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="add_button_color" format="reference"/>
+    <attr name="cancel_button_color" format="reference"/>
+    <attr name="inline_button_width" format="reference"/>
+    <attr name="list_movie_text_size" format="reference"/>
+    <attr name="list_movie_width" format="reference"/>
+    <attr name="list_movie_padding_left" format="reference"/>
+    <attr name="background_color" format="reference"/>
+    <attr name="text_color" format="reference"/>
+    <attr name="icon_launcher" format="reference"/>
+    <attr name="icon_taskbar" format="reference"/>
+</resources>
