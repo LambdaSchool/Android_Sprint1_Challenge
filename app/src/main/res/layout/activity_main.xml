@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <ListView
+    <TextView
         android:id="@+id/listViewMovies"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-    </ListView>
+    </TextView>
 
     <Button
         android:id="@+id/add_movie"

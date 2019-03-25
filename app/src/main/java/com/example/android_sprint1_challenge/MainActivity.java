@@ -31,7 +31,7 @@ class MainActivity extends AppCompatActivity {
 
     private Button saveMovie;
     private ArrayList<String> addArray = new ArrayList<String>();
-    protected ListView showMovieList;
+    private TextView showMovieList;
 
 
 
@@ -39,6 +39,7 @@ class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         context = this;
 
@@ -52,19 +53,27 @@ class MainActivity extends AppCompatActivity {
         });
 
 
-
-            entry = (EditText) findViewById(R.id.add_edit_movie);
-            showMovieList  = (ListView) findViewById(R.id.listViewMovies);
-            saveMovie = (Button) findViewById(R.id.save_button);
-
+        //create entry
+        Intent intent = getIntent();
+        entry = (EditText) intent.getSerializableExtra(MovieEntry.TAG);
+        if(entry == null) {
+            entry = new MovieEntry(MovieEntry.INVALID_ID);
         }
 
-        View.OnClickListener savedMovie = new View.OnClickListener() {
+        //set listerner to add movie to list via edit text and save button
+
+        saveMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                entry ////
+                entry = (EditText) findViewById(R.id.add_edit_movie);
+                showMovieList  = (TextView) findViewById(R.id.listViewMovies);
+                showMovieList.setText(entry.getText().toString());
             }
-        }
+        });
+
+    }
+
+
 
 
     //makes addmovie button clickable

@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class MovieEntry implements Serializable {
 
+    public static final String TAG = "MovieEntry";
+    public static final int INVALID_ID = -1;
 
     private String movieName;
 
