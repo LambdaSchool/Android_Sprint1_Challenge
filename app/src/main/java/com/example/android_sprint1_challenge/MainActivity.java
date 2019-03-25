@@ -2,6 +2,7 @@ package com.example.android_sprint1_challenge;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.ConditionVariable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,12 +22,12 @@ import static com.example.android_sprint1_challenge.MovieEntry.*;
 
 class MainActivity extends AppCompatActivity {
 
-    public static int nextId = 0;
+
 
     private Button addMovieButton;
     private EditText entry;
     Context context;
-
+    SharedPreferences savedMovie;
 
     private Button saveMovie;
     private ArrayList<String> addArray = new ArrayList<String>();
@@ -51,36 +52,27 @@ class MainActivity extends AppCompatActivity {
         });
 
 
-        for (String movieLoop : addArray) {
-            ((LinearLayout) findViewById(R.id.listOfMovies)).addView(genTextView(movieLoop));
 
             entry = (EditText) findViewById(R.id.add_edit_movie);
             showMovieList  = (ListView) findViewById(R.id.listViewMovies);
             saveMovie = (Button) findViewById(R.id.save_button);
+
         }
 
-    }
+        View.OnClickListener savedMovie = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                entry ////
+            }
+        }
 
-    //makes button clicable
+
+    //makes addmovie button clickable
     public void openActivity2() {
         Intent intent = new Intent(this, Activity2.class);
         startActivity(intent);
     }
 
-    //generate text view
-    public TextView genTextView(String movies) {
-        TextView view = new TextView(this);
-        view.setText(movies);
-        view.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-        view.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-        return view;
-    }
-
-    //addmovie
-
-    private void creatMovieEntry () {
-        MovieEntry entry = new MovieEntry(nextId++);
-    }
 
 
 

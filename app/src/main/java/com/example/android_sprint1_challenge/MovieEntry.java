@@ -4,21 +4,14 @@ import java.io.Serializable;
 
 public class MovieEntry implements Serializable {
 
+
     private String movieName;
 
-    private int movieNameInt;
+    private int nextId;
 
-    public MovieEntry(String movieName,int movieNameInt) {
+    public MovieEntry(String movieName, int nextId) {
         this.movieName = movieName;
-        this.movieNameInt = movieNameInt;
-    }
-
-    public int getId() {
-        return movieNameInt;
-    }
-
-    public void setId(int id) {
-        this.movieNameInt = Integer.parseInt(movieName);
+        this.nextId = nextId;
     }
 
     public String getMovieName() {
@@ -27,6 +20,14 @@ public class MovieEntry implements Serializable {
 
     public void setMovieName(String movieName) {
         this.movieName = movieName;
+    }
+
+    public int getNextId() {
+        return nextId;
+    }
+
+    public void setNextId(int nextId) {
+        this.nextId = nextId;
     }
 }
 
