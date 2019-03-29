@@ -6,21 +6,27 @@ import android.os.Bundle;
 import android.support.v7.view.ActionMode;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Switch;
 
 public class ButtonsPage extends AppCompatActivity {
 
-    public Switch watchedOrNo;
-    public Button saveMovie;
-    public Button deleteMovie;
+    private Switch watchedOrNo;
+    private Button saveMovie;
+    private Button deleteMovie;
+    private EditText movieName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buttons_page);
 
-        Switch watchedOrNo = findViewById(R.id.iWatchedThisMovie);
+        watchedOrNo = findViewById(R.id.iWatchedThisMovie);
         watchedOrNo.setChecked(false);
+
+        movieName = findViewById(R.id.editMovie);
+        saveMovie = findViewById(R.id.saveButton);
+        deleteMovie = findViewById(R.id.deleteButton);
     }
 
     @Override
