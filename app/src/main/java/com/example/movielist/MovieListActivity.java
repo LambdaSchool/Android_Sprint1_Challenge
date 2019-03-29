@@ -40,7 +40,7 @@ public class MovieListActivity extends AppCompatActivity {
 
         movieList = new ArrayList<>();
         addFakeMovies();
-        addFakeMovies();
+
     }
 
 
@@ -53,6 +53,7 @@ public class MovieListActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+        interListView.removeAllViews();
         for(MovieModel entry :movieList ){
             interListView.addView(createEntryView(entry));
         }
@@ -84,14 +85,21 @@ public class MovieListActivity extends AppCompatActivity {
 
     }
 
-    private TextView createEntryView(MovieModel entry){
+    private TextView createEntryView(final MovieModel entry){
         TextView textView = new TextView(context);
-
 
         textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT));
         textView.setText(entry.getMovieName() + "-" + entry.getId());
         textView.setPadding(15,15,15,15);
         textView.setTextSize(25);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent viewMovieEntry = new Intent(context,MovieDetail.class);
+                viewMovieEntry.putExtra("entry",entry);
+                startActivity(viewMovieEntry);
+            }
+        });
 
 
         return textView;
@@ -99,7 +107,7 @@ public class MovieListActivity extends AppCompatActivity {
 
     private void addFakeMovies(){
 
-        movieList.add(createMovieEntry("Lorem ipsum ac justo laoreet vehicula."));
-        movieList.add(createMovieEntry(" adipiscing elit. Aenean id ipsum ac justo laoreet vehicula."));
+        movieList.add(createMovieEntry("Jaws."));
+        movieList.add(createMovieEntry(" Matrix"));
     }
 }

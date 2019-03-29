@@ -25,7 +25,11 @@ public class MovieDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
 
+        Intent intent = getIntent();
+        entry = (MovieModel) intent.getSerializableExtra("entry");
+
         movieEntry = findViewById(R.id.movie_entry);
+        movieEntry.setText(entry.getMovieName());
 
         buttonSave = findViewById(R.id.button_save);
         buttonSave.setOnClickListener(new View.OnClickListener() {
