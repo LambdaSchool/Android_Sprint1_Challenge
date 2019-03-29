@@ -32,6 +32,8 @@ public class MovieListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context,MovieDetail.class);
+                MovieModel entry = createMovieEntry();
+                intent.putExtra("entry",entry);
                 startActivity(intent);
 
 
@@ -74,8 +76,15 @@ public class MovieListActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    private MovieModel createMovieEntry(String text){
+    private MovieModel createMovieEntry(){
         MovieModel entry = new MovieModel(nextid++);
+
+        return entry;
+
+    }
+
+    private MovieModel createMovieEntry(String text){
+        MovieModel entry =  createMovieEntry();
 
 
         entry.setMovieName(text);
