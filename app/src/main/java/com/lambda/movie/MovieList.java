@@ -3,17 +3,25 @@ package com.lambda.movie;
 import java.io.Serializable;
 
 public class MovieList implements Serializable {
-
-    private static String stringName;
-    private static boolean bWatched;
-   MovieList(String name, boolean watched){
-        this.stringName=name;
+    private int index;
+    private String stringName;
+    private boolean bWatched;
+   MovieList(int index, String name, boolean watched){
+       this.index=index;
+       this.stringName=name;
         bWatched=watched;
     }
     public String getName(){
        return stringName;
     }
 
+    public void setIndex(int index){
+        this.index=index;
+    }
+
+    public int getIndex(){
+       return this.index;
+    }
     public void setName(String name){
        this.stringName=name;
 
@@ -40,9 +48,16 @@ public class MovieList implements Serializable {
        return this;
     }
     public String toString(){
-       if( bWatched==false)return stringName+'\n';
-       else    return "<strike>"+stringName+"</strike>"+'\n';
+        return "["+index+"] "+stringName+'\n';
 
+    }
+    boolean isWatched(){
+       return bWatched;
+    }
+    public void update(MovieList ml){
+        this.index=ml.getIndex();
+        this.stringName=ml.getName();
+        bWatched=ml.getWatched();
     }
 }
 

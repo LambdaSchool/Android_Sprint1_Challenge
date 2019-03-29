@@ -9,12 +9,23 @@
     tools:context=".EditingPageActivity">
     <EditText
         android:id="@+id/input_data"
-        android:text="Input movie you have watched."
+        android:hint="Input movie you have watched."
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/button_watched"
-        android:text="Not watched"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"/>
+    <Switch
+        android:id="@+id/switch_watched"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:switchMinWidth="56dp"
+        android:text="Watched:"
+        android:drawableBottom="@android:color/holo_blue_dark"
+
+        android:textOff="No"
+        android:textOn="Yes"/>
+    <TextView
+        android:id="@+id/text_debug_for_switch"
+        android:text="Once you choose from list then delete text here and save. It will be deleted like the way delete button would do."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <LinearLayout
