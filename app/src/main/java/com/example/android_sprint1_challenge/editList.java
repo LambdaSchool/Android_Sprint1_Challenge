@@ -41,13 +41,16 @@ public class editList extends AppCompatActivity
         if (startIntent.getSerializableExtra(movieModel.TAG) != null){
             movieModel m = (movieModel) startIntent.getSerializableExtra(movieModel.TAG);
             addMovie.setText(m.getTitle());
+            checkWatched.setChecked(m.isSeen());
         }
 
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 movieListApi.deleteMovie(addMovie.getText().toString());
-                addMovie.setText("");
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
+                finish();
 
             }
         });
