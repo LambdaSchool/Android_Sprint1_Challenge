@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,10 +18,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     public static final int EDIT_ENTRY_REQUEST_CODE = 2;
+    public static final int NEW_ENTRY_REQUEST = 1;
     private Button addMovieButton;
     Context context;
     private LinearLayout movieList;
     private ArrayList<MovieEntry> movieEntries;
+    private Button saveMovie;
 
 
     @Override
@@ -30,9 +33,21 @@ public class MainActivity extends AppCompatActivity {
         context = this;
 
         movieList = findViewById(R.id.listViewOfMovies);
+        saveMovie = findViewById(R.id.saveButton);;
 
         movieEntries = new ArrayList<>();
         addMovieEntries();
+
+        saveMovie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,ButtonsPage.class);
+                MovieEntry entry = createMovieEntry();
+                intent.putExtra(MovieEntry.TAG, entry);
+                startActivityForResult(intent, NEW_ENTRY_REQUEST);
+            }
+        });
+
 
         addMovieButton = findViewById(R.id.add_movie);
         addMovieButton.setOnClickListener(new View.OnClickListener() {
@@ -42,6 +57,22 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
+        /*Intent intent = getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
+
+        if (Intent.ACTION_SEND.equals(action) && type!= null ) {
+            if(type.startsWith("string/")) {
+                MovieEntry entry = createMovieEntry();
+
+            }
+
+        }*/
+
+
+
+
 
 
     }
@@ -53,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     //get list and show list here
 
-    ]
+
 
 
 
@@ -91,8 +122,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView generateTextView(final MovieEntry entry){
         TextView textView = new TextView(context);
-        textView.setTextSize(25);
-        textView.setTextColor(Color.BLACK);
+        textView.setTextSize(18);
+        textView.setTextColor(Color.BLUE);
         textView.setText(String.format("Movie: %s", entry.getMovieText()));
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,7 +149,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //results
+    private void addMovieEntries(){
+    movieEntries.add(createMovieEntry());
+
+    }
 
 
 }
