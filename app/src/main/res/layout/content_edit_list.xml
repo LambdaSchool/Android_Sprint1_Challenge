@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".editList"
+    tools:showIn="@layout/activity_edit_list"
+    android:orientation="vertical">
+
+
+
+    <EditText
+        android:id="@+id/add_movie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="add movie to list"
+        android:textStyle="bold"
+        android:textSize="24dp"/>
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/check_watched"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="watched"
+        android:textSize="24dp"
+        android:layout_gravity="right"/>
+    <Button
+        android:id="@+id/button_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:text="delete"/>
+
+
+</LinearLayout>
