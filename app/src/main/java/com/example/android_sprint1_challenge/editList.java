@@ -4,14 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
-import java.util.ArrayList;
+import static com.example.android_sprint1_challenge.MainActivity.REQUEST_CODE1;
 
 public class editList extends AppCompatActivity
 {
@@ -37,18 +36,27 @@ public class editList extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Intent intent;
+                int index = 0;
+                movieModel movie;
+                movie = new movieModel(index++,addMovie.getText().toString(),checkWatched.isChecked());
+                movieListApi.addMovie(movie);
+
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
+//                startActivityForResult(intent, REQUEST_CODE1);
+                finish();
+
+                /*Intent intent;
                 int index = 0;
                 movieModel movie;
                 movie = new movieModel(index++,addMovie.getText().toString(),checkWatched.isChecked());
 
-                intent = new Intent(context, MainActivity.class);
+
                 //intent.putExtra("movie", movie);
                 intent.putExtra("movie", addMovie.getText().toString());
                 intent.putExtra("watched", checkWatched.isChecked());
-                setResult(RESULT_OK, intent);
-                startActivityForResult(intent, REQUEST_CODE);
-                finish();
+
+                finish();*/
             }
         });
     }

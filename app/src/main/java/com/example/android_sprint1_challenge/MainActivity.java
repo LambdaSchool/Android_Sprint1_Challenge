@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final int REQUEST_CODE1 = 11;
     final int REQUEST_CODE = 19;
 
     Button addButton;
@@ -47,31 +48,57 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent intent) {
-        super.onActivityResult(requestCode, resultCode, intent);
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK){
+            if (requestCode == REQUEST_CODE1){
+
+                ArrayList<movieModel> movies = movieRepo.getMovieList();
+                for (movieModel movie:movies)
+                {
+                    scrollLayout.addView(createTextView(movie.getTitle(), movie.isSeen()));
+
+                }
+
+            }
+
+        }
+
+
+
+
+    }
+/* @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CODE) {
 
-                Log.i("check", "onActivityResult: activity");
 
-                ArrayList<movieModel> movies = new ArrayList<>();
+                ArrayList<movieModel> movies = movieRepo.getMovieList();
+                for (movieModel movie:movies)
+                {
+                    scrollLayout.addView(createTextView(movie.getTitle(), movie.isSeen()));
+
+                }
+*//*
+
+
+               *//*
                 //Intent finalIntent = getIntent();
                 //movieModel movie = (movieModel) getIntent().getSerializableExtra("movie");
-                movieModel movie = new movieModel(1,intent.getStringExtra("movie"), intent.getBooleanExtra("watched",false));
-                movies.add(movie);
-                //for (movieModel movie : movies) {
 
-                scrollLayout.addView(createTextView(movie.getTitle(), movie.isSeen()));
+                //for (movieModel movie : movies) {*//*
+
+
 
 
 
                 }
             }
         }
-
+*/
 
 
 
