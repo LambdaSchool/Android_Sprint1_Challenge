@@ -88,10 +88,12 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.i( getLocalClassName(),this.getClass().getSimpleName() + "onActivityResult");
 
-                ArrayList<movieModel> movies = movieRepo.getMovieList();
+
+                ArrayList<movieModel> movies ;
+                movies = movieRepo.getMovieList();
                 for (movieModel movie:movies)
                 {
-                    scrollLayout.addView(createTextView(movie.getTitle(), movie.isSeen()));
+                    scrollLayout.addView(createTextView(movie));
 
                 }
 
@@ -103,56 +105,25 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-/* @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_CODE) {
 
-
-                ArrayList<movieModel> movies = movieRepo.getMovieList();
-                for (movieModel movie:movies)
-                {
-                    scrollLayout.addView(createTextView(movie.getTitle(), movie.isSeen()));
-
-                }
-*//*
-
-
-               *//*
-                //Intent finalIntent = getIntent();
-                //movieModel movie = (movieModel) getIntent().getSerializableExtra("movie");
-
-                //for (movieModel movie : movies) {*//*
-
-
-
-
-
-                }
-            }
-        }
-*/
-
-
-
-
-
-    public TextView createTextView(final String title, final boolean seenIt)
+    public TextView createTextView(final  movieModel movie)
     {
 
 
         final TextView tv = new TextView(getApplicationContext());
-        tv.setText(title);
-        //tv.setTextSize(24);
-        if(seenIt)
+        tv.setText(movie.getTitle());
+        tv.setTextSize(24);
+        if(movie.isSeen())
         {
             tv.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         }
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tv.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+                Intent intent = new Intent(context, editList.class);
+                intent.putExtra(movieModel.TAG, movie);
+                startActivityForResult(intent, 2);
+
             }
         });
     return tv;

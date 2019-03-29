@@ -10,6 +10,11 @@ public class movieListApi
         return movieList;
     }
 
+    public static void deleteMovie(movieModel movie)
+    {
+        movieList.remove(movie);
+    }
+
 
    public static void addMovie(movieModel movie)
    {

@@ -26,6 +26,12 @@
         android:text="watched"
         android:textSize="24dp"
         android:layout_gravity="right"/>
+    <Button
+        android:id="@+id/button_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:text="delete"/>
 
 
 </LinearLayout>

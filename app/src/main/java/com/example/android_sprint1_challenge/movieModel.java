@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class movieModel implements Serializable
 {
+    public static final String TAG = "movie";
     private int index;
     private  String title;
     private  boolean seen;
