@@ -6,10 +6,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ScrollView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MovieListActivity extends AppCompatActivity {
+
+
     Context context = this;
     ScrollView movieListView;
+    private ArrayList<MovieModel> movieList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,5 +32,21 @@ public class MovieListActivity extends AppCompatActivity {
 
             }
         });
+
+        movieList = new ArrayList<>();
+    }
+
+    private TextView createEntryView(MovieModel entry){
+        TextView textView = new TextView(context);
+
+
+
+
+        textView.setText(entry.getMovieName());
+        textView.setPadding(15,15,15,15);
+        textView.setTextSize(25);
+
+
+        return textView;
     }
 }

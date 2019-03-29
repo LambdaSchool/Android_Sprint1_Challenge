@@ -7,13 +7,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MovieDetail extends AppCompatActivity {
 
     private MovieModel entry;
-    Context context = this;
-    EditText movieEntry;
-    Button buttonSave, buttonDelete;
+    private int nextid = 0;
+    private Context context = this;
+    private EditText movieEntry;
+    private Button buttonSave, buttonDelete;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,5 +40,11 @@ public class MovieDetail extends AppCompatActivity {
 
 
 
+
     }
+
+
+    }
+
+
 }
