@@ -39,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //get list and show list here
+
+
+
+
+
     @Override
     protected void onStart() {
         super.onStart();
