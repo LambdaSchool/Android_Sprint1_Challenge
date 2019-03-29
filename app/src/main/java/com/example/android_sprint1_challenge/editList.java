@@ -37,7 +37,7 @@ public class editList extends AppCompatActivity
         checkWatched = findViewById(R.id.check_watched);
         FloatingActionButton fab = findViewById(R.id.fab);
 
-        Intent startIntent = getIntent();
+        final Intent startIntent = getIntent();
         if (startIntent.getSerializableExtra(movieModel.TAG) != null){
             movieModel m = (movieModel) startIntent.getSerializableExtra(movieModel.TAG);
             addMovie.setText(m.getTitle());
@@ -48,8 +48,8 @@ public class editList extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 movieListApi.deleteMovie(addMovie.getText().toString());
-                Intent intent = new Intent();
-                setResult(RESULT_OK, intent);
+                //Intent intent = new Intent();
+                setResult(RESULT_OK, startIntent);
                 finish();
 
             }
