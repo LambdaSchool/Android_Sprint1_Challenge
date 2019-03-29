@@ -87,11 +87,12 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK){
 
                 Log.i( getLocalClassName(),this.getClass().getSimpleName() + "onActivityResult");
+                scrollLayout.removeAllViews();
 
 
                 ArrayList<movieModel> movies ;
                 movies = movieRepo.getMovieList();
-                scrollLayout.removeAllViews();
+
                 for (movieModel movie:movies)
                 {
                     scrollLayout.addView(createTextView(movie));
@@ -123,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(context, editList.class);
                 intent.putExtra(movieModel.TAG, movie);
-                startActivityForResult(intent, 2);
+                startActivityForResult(intent, REQUEST_CODE1);
 
             }
         });

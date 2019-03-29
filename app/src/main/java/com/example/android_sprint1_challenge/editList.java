@@ -60,9 +60,9 @@ public class editList extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                int index = 0;
+
                 movieModel movie;
-                movie = new movieModel(index++,addMovie.getText().toString(),checkWatched.isChecked());
+                movie = new movieModel(addMovie.getText().toString(),checkWatched.isChecked());
                 movieListApi.addMovie(movie);
 
                 Intent intent = new Intent();
