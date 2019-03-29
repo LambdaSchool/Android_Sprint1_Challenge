@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 Intent  intent = new Intent(context, editList.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE1);
 
             }
 
@@ -48,11 +48,45 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i( getLocalClassName(),this.getClass().getSimpleName() + "onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i( getLocalClassName(),this.getClass().getSimpleName() + "onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i( getLocalClassName(),this.getClass().getSimpleName() + "onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i( getLocalClassName(),this.getClass().getSimpleName() + "onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i( getLocalClassName(),this.getClass().getSimpleName() + "onDestroy");
+    }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK){
-            if (requestCode == REQUEST_CODE1){
+
+        if (requestCode == REQUEST_CODE1){
+            if (resultCode == RESULT_OK){
+
+                Log.i( getLocalClassName(),this.getClass().getSimpleName() + "onActivityResult");
 
                 ArrayList<movieModel> movies = movieRepo.getMovieList();
                 for (movieModel movie:movies)

@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -14,7 +15,7 @@ import static com.example.android_sprint1_challenge.MainActivity.REQUEST_CODE1;
 
 public class editList extends AppCompatActivity
 {
-    final int REQUEST_CODE = 19;
+    //final int REQUEST_CODE = 19;
 
     EditText addMovie;
     AppCompatCheckBox checkWatched;
@@ -60,5 +61,37 @@ public class editList extends AppCompatActivity
             }
         });
     }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i( getLocalClassName(),this.getClass().getSimpleName() + "onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i( getLocalClassName(),this.getClass().getSimpleName() + "onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i( getLocalClassName(),this.getClass().getSimpleName() + "onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i( getLocalClassName(),this.getClass().getSimpleName() + "onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i( getLocalClassName(),this.getClass().getSimpleName() + "onDestroy");
+    }
+
 
 }
