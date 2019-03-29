@@ -10,9 +10,14 @@ public class movieListApi
         return movieList;
     }
 
-    public static void deleteMovie(movieModel movie)
+    public static void deleteMovie(String movie)
     {
-        movieList.remove(movie);
+        for (movieModel m: movieList)
+        {
+            if (m.getTitle().toLowerCase().equals(movie.toLowerCase())){
+                movieList.remove(m);
+            }
+        }
     }
 
 
@@ -26,5 +31,6 @@ public class movieListApi
    }
 
 
-
 }
+
+

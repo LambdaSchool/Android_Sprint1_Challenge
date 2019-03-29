@@ -46,8 +46,7 @@ public class editList extends AppCompatActivity
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ()
-                movieListApi.deleteMovie(movieListApi.getMovieList().equals(addMovie.getText().toString()));
+                movieListApi.deleteMovie(addMovie.getText().toString());
                 addMovie.setText("");
 
             }
