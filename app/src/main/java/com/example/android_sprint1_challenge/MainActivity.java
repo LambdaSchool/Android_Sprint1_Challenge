@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     Context context;
     private LinearLayout movieList;
     private ArrayList<MovieEntry> movieEntries;
-    private Button saveMovie;
 
 
     @Override
@@ -33,20 +32,9 @@ public class MainActivity extends AppCompatActivity {
         context = this;
 
         movieList = findViewById(R.id.listViewOfMovies);
-        saveMovie = findViewById(R.id.saveButton);;
 
         movieEntries = new ArrayList<>();
-        addMovieEntries();
-
-        saveMovie.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context,ButtonsPage.class);
-                MovieEntry entry = createMovieEntry();
-                intent.putExtra(MovieEntry.TAG, entry);
-                startActivityForResult(intent, NEW_ENTRY_REQUEST);
-            }
-        });
+        //addMovieEntries();
 
 
         addMovieButton = findViewById(R.id.add_movie);
@@ -57,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
+
 
         /*Intent intent = getIntent();
         String action = intent.getAction();
@@ -128,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent detailIntent = new Intent(context,MainActivity.class);
+                Intent detailIntent = new Intent(context,ButtonsPage.class);
                 detailIntent.putExtra(MovieEntry.TAG, entry);
                 startActivityForResult(detailIntent, EDIT_ENTRY_REQUEST_CODE);
             }

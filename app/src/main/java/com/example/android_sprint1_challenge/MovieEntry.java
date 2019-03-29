@@ -1,5 +1,7 @@
 package com.example.android_sprint1_challenge;
 
+import android.widget.EditText;
+
 import java.io.Serializable;
 
 public class MovieEntry implements Serializable {
@@ -17,6 +19,11 @@ public class MovieEntry implements Serializable {
     public MovieEntry(int id) {
         this.id = id;
         this.movieText = "";
+    }
+
+    public MovieEntry(EditText movieName) {
+        this.movieText = "";
+
     }
 
     public int getId() {
