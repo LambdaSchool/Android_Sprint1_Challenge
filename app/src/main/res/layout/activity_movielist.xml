@@ -8,9 +8,16 @@
     tools:context=".MovieListActivity">
 
     <ScrollView
+        android:fillViewport="true"
         android:id="@+id/movie_listView"
         android:layout_width="match_parent"
         android:layout_height="550dp">
+
+        <LinearLayout
+            android:id="@+id/inter_listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></LinearLayout>
+
 
 
     </ScrollView>

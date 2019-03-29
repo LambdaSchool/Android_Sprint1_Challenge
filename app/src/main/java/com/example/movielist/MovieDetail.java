@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class MovieDetail extends AppCompatActivity {
 
     private MovieModel entry;
-    private int nextid = 0;
+
     private Context context = this;
     private EditText movieEntry;
     private Button buttonSave, buttonDelete;
@@ -43,8 +43,34 @@ public class MovieDetail extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
 
     }
 
 
-}
+
