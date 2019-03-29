@@ -10,16 +10,17 @@ import android.widget.Switch;
 
 public class ButtonsPage extends AppCompatActivity {
 
-    private Switch watchedOrNo;
-    private Button saveMovie;
-    private Button deleteMovie;
+    public Switch watchedOrNo;
+    public Button saveMovie;
+    public Button deleteMovie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buttons_page);
 
-
+        Switch watchedOrNo = findViewById(R.id.iWatchedThisMovie);
+        watchedOrNo.setChecked(false);
     }
 
     @Override
