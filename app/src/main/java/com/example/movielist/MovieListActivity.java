@@ -14,13 +14,15 @@ public class MovieListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_MovieList);
+        setContentView(R.layout.activity_movielist);
 
         movieListView = findViewById(R.id.movie_listView);
         findViewById(R.id.add_movie_to_list).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
+                Intent intent = new Intent(context,MovieDetail.class);
+                startActivity(intent);
+
 
             }
         });

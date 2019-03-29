@@ -7,7 +7,7 @@
     tools:context="com.example.movielist.MovieDetail">
 
     <EditText
-        android:id="@+id/movie_detiaView"
+        android:id="@+id/movie_entry"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
@@ -30,7 +30,7 @@
         android:layout_marginRight="8dp"
         android:text="Save"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/movie_detiaView"
+        app:layout_constraintStart_toEndOf="@+id/movie_entry"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
