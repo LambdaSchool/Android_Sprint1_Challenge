@@ -88,6 +88,7 @@ public class MovieListActivity extends AppCompatActivity {
         TextView textView = new TextView(context);
 
 
+        textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT));
         textView.setText(entry.getMovieName() + "-" + entry.getId());
         textView.setPadding(15,15,15,15);
         textView.setTextSize(25);
@@ -97,8 +98,8 @@ public class MovieListActivity extends AppCompatActivity {
     }
 
     private void addFakeMovies(){
-        movieList.add(createMovieEntry("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id ipsum ac justo laoreet vehicula."));
-        movieList.add(createMovieEntry("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id ipsum ac justo laoreet vehicula."));
-        movieList.add(createMovieEntry("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id ipsum ac justo laoreet vehicula."));
+
+        movieList.add(createMovieEntry("Lorem ipsum ac justo laoreet vehicula."));
+        movieList.add(createMovieEntry(" adipiscing elit. Aenean id ipsum ac justo laoreet vehicula."));
     }
 }
