@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
                 ArrayList<movieModel> movies ;
                 movies = movieRepo.getMovieList();
+                scrollLayout.removeAllViews();
                 for (movieModel movie:movies)
                 {
                     scrollLayout.addView(createTextView(movie));
