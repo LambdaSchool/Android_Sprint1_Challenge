@@ -8,17 +8,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class MovieDetail extends AppCompatActivity {
 
     public static final int ENTRY_REQUEST_CODE = 8;
-    private MovieModel entry;
+    private MovieModel entryMovieModel;
 
     private Context context = this;
-    private EditText movieEntry;
+    private EditText movieEntryEditText;
     private Button buttonSave, buttonDelete;
     ArrayList<MovieModel> movieList;
 
@@ -29,19 +28,31 @@ public class MovieDetail extends AppCompatActivity {
         setContentView(R.layout.activity_movie_detail);
 
         Intent intent = getIntent();
-        entry = (MovieModel) intent.getSerializableExtra(MovieModel.TAG);
+        entryMovieModel = (MovieModel) intent.getSerializableExtra(MovieModel.TAG);
 
-        movieEntry = findViewById(R.id.movie_entry);
-        movieEntry.setText(entry.getMovieName());
+        movieEntryEditText = findViewById(R.id.movie_entry);
+        movieEntryEditText.setText(entryMovieModel.getMovieName());
 
         buttonSave = findViewById(R.id.button_save);
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,MovieListActivity.class);
-                String entry = String.valueOf(movieEntry.getText());
-                intent.putExtra(MovieModel.TAG,entry);
-                startActivityForResult(intent, ENTRY_REQUEST_CODE);
+                Intent intent = new Intent();
+                entryMovieModel.setMovieName(movieEntryEditText.getText().toString());
+                intent.putExtra(MovieModel.TAG, entryMovieModel);
+                setResult(RESULT_OK,intent);
+                finish();
+
+            }
+        });
+
+        buttonDelete = findViewById(R.id.button_delete);
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_CANCELED);
+                finish();
+
             }
         });
 

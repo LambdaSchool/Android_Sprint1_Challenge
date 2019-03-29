@@ -106,7 +106,7 @@ public class MovieListActivity extends AppCompatActivity {
     }
 
     private TextView createEntryView(final MovieModel entry){
-        TextView textView = new TextView(context);
+        final TextView textView = new TextView(context);
 
         textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT));
         textView.setText(entry.getMovieName() + "-" + entry.getId());
@@ -115,9 +115,12 @@ public class MovieListActivity extends AppCompatActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                movieList.remove(entry);
                 Intent viewMovieEntry = new Intent(context,MovieDetail.class);
                 viewMovieEntry.putExtra(MovieModel.TAG,entry);
-                startActivity(viewMovieEntry);
+
+                startActivityForResult(viewMovieEntry,0);
+
             }
         });
 
@@ -127,9 +130,10 @@ public class MovieListActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode == NEW_ENTRY_REQUEST_CODE && resultCode == RESULT_OK){
+        if( resultCode == RESULT_OK){
             MovieModel entry = (MovieModel) data.getSerializableExtra(MovieModel.TAG);
             movieList.add(entry);
+            createEntryView(entry);
         }
 
     }
