@@ -2,6 +2,7 @@ package com.example.movielist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +15,9 @@ import java.util.ArrayList;
 
 public class MovieListActivity extends AppCompatActivity {
 
+    public static final int NEW_ENTRY_REQUEST_CODE = 4;
     static int nextid = 0;
+    MovieModel entry;
     Context context = this;
     ScrollView movieListView;
     LinearLayout interListView;
@@ -25,6 +28,13 @@ public class MovieListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movielist);
 
+        Intent intent = getIntent();
+        entry = (MovieModel) intent.getSerializableExtra(MovieModel.TAG);
+        if(entry == null){
+            entry = new MovieModel(MovieModel.INVALD_ID);
+
+        }
+
         interListView = findViewById(R.id.inter_listView);
 
         movieListView = findViewById(R.id.movie_listView);
@@ -33,8 +43,9 @@ public class MovieListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(context,MovieDetail.class);
                 MovieModel entry = createMovieEntry();
-                intent.putExtra("entry",entry);
-                startActivity(intent);
+                intent.putExtra(MovieModel.TAG,entry);
+                startActivityForResult(intent, NEW_ENTRY_REQUEST_CODE);
+
 
 
             }
@@ -105,13 +116,22 @@ public class MovieListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent viewMovieEntry = new Intent(context,MovieDetail.class);
-                viewMovieEntry.putExtra("entry",entry);
+                viewMovieEntry.putExtra(MovieModel.TAG,entry);
                 startActivity(viewMovieEntry);
             }
         });
 
 
         return textView;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == NEW_ENTRY_REQUEST_CODE && resultCode == RESULT_OK){
+            MovieModel entry = (MovieModel) data.getSerializableExtra(MovieModel.TAG);
+            movieList.add(entry);
+        }
+
     }
 
     private void addFakeMovies(){

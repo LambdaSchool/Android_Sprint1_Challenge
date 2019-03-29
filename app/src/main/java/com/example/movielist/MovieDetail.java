@@ -2,6 +2,7 @@ package com.example.movielist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,11 +14,13 @@ import java.util.ArrayList;
 
 public class MovieDetail extends AppCompatActivity {
 
+    public static final int ENTRY_REQUEST_CODE = 8;
     private MovieModel entry;
 
     private Context context = this;
     private EditText movieEntry;
     private Button buttonSave, buttonDelete;
+    ArrayList<MovieModel> movieList;
 
 
     @Override
@@ -26,7 +29,7 @@ public class MovieDetail extends AppCompatActivity {
         setContentView(R.layout.activity_movie_detail);
 
         Intent intent = getIntent();
-        entry = (MovieModel) intent.getSerializableExtra("entry");
+        entry = (MovieModel) intent.getSerializableExtra(MovieModel.TAG);
 
         movieEntry = findViewById(R.id.movie_entry);
         movieEntry.setText(entry.getMovieName());
@@ -37,13 +40,12 @@ public class MovieDetail extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(context,MovieListActivity.class);
                 String entry = String.valueOf(movieEntry.getText());
-                intent.putExtra("entry",entry);
-                startActivity(intent);
+                intent.putExtra(MovieModel.TAG,entry);
+                startActivityForResult(intent, ENTRY_REQUEST_CODE);
             }
         });
 
-
-
+        movieList = new ArrayList<>();
 
     }
 
@@ -73,8 +75,18 @@ public class MovieDetail extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(resultCode == RESULT_OK && requestCode == ENTRY_REQUEST_CODE){
+            if (data != null){
+                MovieModel entry = (MovieModel) data.getSerializableExtra(MovieModel.TAG);
+                movieList.add(entry);
+            }
 
+            }
+        }
     }
+
 
 
 
