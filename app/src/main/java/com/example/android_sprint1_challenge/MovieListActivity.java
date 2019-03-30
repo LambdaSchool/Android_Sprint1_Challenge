@@ -3,18 +3,16 @@ package com.example.android_sprint1_challenge;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MovieListActivity extends AppCompatActivity {
 
 
     public static final int EDIT_ENTRY_REQUEST_CODE = 2;
@@ -28,13 +26,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_movies_list);
         context = this;
 
         movieList = findViewById(R.id.listViewOfMovies);
 
         movieEntries = new ArrayList<>();
-        //addMovieEntries();
+        addMovieEntries();
 
 
         addMovieButton = findViewById(R.id.add_movie);
@@ -46,29 +44,10 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-
-
-        /*Intent intent = getIntent();
-        String action = intent.getAction();
-        String type = intent.getType();
-
-        if (Intent.ACTION_SEND.equals(action) && type!= null ) {
-            if(type.startsWith("string/")) {
-                MovieEntry entry = createMovieEntry();
-
-            }
-
-        }*/
-
-
-
-
-
-
     }
 
     public void openButtonPage() {
-        Intent intent = new Intent(this, ButtonsPage.class);
+        Intent intent = new Intent(this, MovieDetails.class);
         startActivity(intent);
     }
 
@@ -114,11 +93,11 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = new TextView(context);
         textView.setTextSize(18);
         textView.setTextColor(Color.BLUE);
-        textView.setText(String.format("Movie: %s", entry.getMovieText()));
+        textView.setText(entry.getMovieText());
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent detailIntent = new Intent(context,ButtonsPage.class);
+                Intent detailIntent = new Intent(context, MovieDetails.class);
                 detailIntent.putExtra(MovieEntry.TAG, entry);
                 startActivityForResult(detailIntent, EDIT_ENTRY_REQUEST_CODE);
             }
