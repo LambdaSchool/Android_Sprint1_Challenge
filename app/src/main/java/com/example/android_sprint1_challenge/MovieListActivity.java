@@ -3,6 +3,7 @@ package com.example.android_sprint1_challenge;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -67,10 +68,6 @@ public class MovieListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        for (MovieEntry movieEntryEntry : movieEntries) {
-            movieList.addView(generateTextView(movieEntryEntry));
-
-        }
     }
 
     @Override
@@ -81,7 +78,6 @@ public class MovieListActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-
     }
 
     @Override
@@ -103,7 +99,21 @@ public class MovieListActivity extends AppCompatActivity {
             }
         });
         return textView;
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == EDIT_ENTRY_REQUEST_CODE && resultCode == RESULT_OK){
+            if(data != null){
+                MovieEntry entry = (MovieEntry) data.getSerializableExtra(MovieEntry.TAG);
+                movieEntries.set(entry.getId(), entry);
+            }
+        }else if(requestCode == NEW_ENTRY_REQUEST && resultCode == RESULT_OK) {
+            if (data != null) {
+                MovieEntry entry = (MovieEntry) data.getSerializableExtra(MovieEntry.TAG);
+                movieEntries.add(entry);
+            }
+        }
     }
 
     private MovieEntry createMovieEntry() {

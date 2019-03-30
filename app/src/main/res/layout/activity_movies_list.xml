@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".MovieListActivity">
 
-    <ScrollView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
@@ -30,7 +30,7 @@
         </LinearLayout>
 
 
-    </ScrollView>
+    </TextView>
 
     <Button
         android:id="@+id/add_movie"
