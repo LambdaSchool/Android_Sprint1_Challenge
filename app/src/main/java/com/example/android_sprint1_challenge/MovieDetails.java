@@ -1,7 +1,6 @@
 package com.example.android_sprint1_challenge;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,9 +11,10 @@ import android.widget.Switch;
 public class MovieDetails extends AppCompatActivity {
 
     public static final int NEW_ENTRY_REQUEST = 1;
-    private Switch watchedOrNo;
+    private Switch aSwitch;
     private Button deleteMovie;
     private EditText movieName;
+    private String movieNameString;
     Context context;
     private Button saveMovie;
 
@@ -24,14 +24,24 @@ public class MovieDetails extends AppCompatActivity {
         setContentView(R.layout.activity_movies_details);
 
         context = this;
-        watchedOrNo = findViewById(R.id.iWatchedThisMovie);
+        aSwitch = findViewById(R.id.iWatchedThisMovie);
+        aSwitch.setChecked(false);
 
         movieName = findViewById(R.id.editMovie);
 
         deleteMovie = findViewById(R.id.deleteButton);
         saveMovie = findViewById(R.id.saveButton);
 
+        saveMovie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                movieNameString = movieName.getText().toString();
+
+            }
+        });
+
     }
+
 
 
     @Override
