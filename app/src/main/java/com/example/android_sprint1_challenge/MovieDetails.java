@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 
+import java.util.jar.JarEntry;
+
 public class MovieDetails extends AppCompatActivity {
 
     public static final int NEW_ENTRY_REQUEST = 1;
@@ -20,6 +22,7 @@ public class MovieDetails extends AppCompatActivity {
     private String movieNameString;
     Context context;
     private Button saveMovie;
+    private MovieEntry entry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +69,8 @@ public class MovieDetails extends AppCompatActivity {
 
             }
         });
+
+
 
 
     }
