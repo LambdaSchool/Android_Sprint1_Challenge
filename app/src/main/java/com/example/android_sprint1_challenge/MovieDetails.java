@@ -1,6 +1,9 @@
 package com.example.android_sprint1_challenge;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,18 +30,43 @@ public class MovieDetails extends AppCompatActivity {
         aSwitch = findViewById(R.id.iWatchedThisMovie);
         aSwitch.setChecked(false);
 
-        movieName = findViewById(R.id.editMovie);
+
 
         deleteMovie = findViewById(R.id.deleteButton);
-        saveMovie = findViewById(R.id.saveButton);
+
+
+        //saveMovie.setOnClickListener(new View.OnClickListener() {
+        //    @Override
+        //    public void onClick(View v) {
+        //        movieNameString = movieName.getText().toString();
+        //
+        //    }
+        //});
+
+        saveMovie =  (Button) findViewById(R.id.saveButton);
+        movieName = (EditText) findViewById(R.id.editMovie);
+
+        ///retrieve
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String savedMovie = preferences.getString("st","");
+        movieName.setText(savedMovie);
 
         saveMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 movieNameString = movieName.getText().toString();
+// saves data
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MovieDetails.this);
+                SharedPreferences.Editor editor = preferences.edit();
+
+                editor.putString("st",movieNameString);
+                editor.apply();
 
             }
         });
+
 
     }
 

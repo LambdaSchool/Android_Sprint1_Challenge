@@ -19,7 +19,7 @@ public class MovieListActivity extends AppCompatActivity {
     private Button addMovieButton;
     Context context;
     private LinearLayout movieList;
-    private ArrayList<MovieEntry> movieEntries;
+    private ArrayList<String> movieEntries;
 
 
     @Override
@@ -31,6 +31,8 @@ public class MovieListActivity extends AppCompatActivity {
         movieList = findViewById(R.id.listViewOfMovies);
 
         movieEntries = new ArrayList<>();
+
+
 
 
         addMovieButton = findViewById(R.id.add_movie);
@@ -95,10 +97,6 @@ public class MovieListActivity extends AppCompatActivity {
 
     }
 
-    private MovieEntry createMovieEntry() {
-        MovieEntry entry = new MovieEntry(movieEntries.size());
-        return entry;
-    }
 
 
 
