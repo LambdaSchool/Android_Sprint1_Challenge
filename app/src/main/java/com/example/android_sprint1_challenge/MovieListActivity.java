@@ -4,16 +4,20 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Movie;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class MovieListActivity extends AppCompatActivity {
 
@@ -22,7 +26,8 @@ public class MovieListActivity extends AppCompatActivity {
     private Button addMovieButton;
     Context context;
     private ListView movieList;
-    private ArrayList<String> movieEntries;
+    static final ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+    private ListView movieList;
 
 
     @Override
@@ -31,11 +36,12 @@ public class MovieListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movies_list);
 
 
+
         context = this;
 
         movieList = findViewById(R.id.listViewOfMovies);
 
-        movieEntries = new ArrayList<>();
+
 
 
         addMovieButton = findViewById(R.id.add_movie);

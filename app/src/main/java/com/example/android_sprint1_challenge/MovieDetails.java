@@ -1,17 +1,21 @@
 package com.example.android_sprint1_challenge;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Movie;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.jar.JarEntry;
 
 public class MovieDetails extends AppCompatActivity {
@@ -25,13 +29,31 @@ public class MovieDetails extends AppCompatActivity {
     private Button saveMovie;
     private MovieEntry entry;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies_details);
 
+        addDataButton();
 
+    }
 
+        private void addDataButton(){
+            context = this;
+            aSwitch = findViewById(R.id.iWatchedThisMovie);
+            deleteMovie = findViewById(R.id.deleteButton);
+            movieName = (EditText) findViewById(R.id.editMovie);
+            final String mn = movieName.getText().toString();
+            saveMovie =  (Button) findViewById(R.id.saveButton);
+            saveMovie.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MovieDetails.this, MovieListActivity.class);
+                    intent.putExtra("Movie Name", movieName.getText().toString());
+                    startActivity(intent);
+                    }
+            });
 
 
 
@@ -67,11 +89,16 @@ public class MovieDetails extends AppCompatActivity {
         ///    }
         ///});
 
-
-
-
     }
 
+    @SuppressLint("ResourceType")
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.id.listViewOfMovies, menu);
+
+        return true;
+    }
 
 
     @Override
