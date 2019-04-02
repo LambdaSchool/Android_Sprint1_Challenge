@@ -7,40 +7,32 @@
     android:orientation="vertical"
     tools:context=".MovieListActivity">
 
-    <ScrollView
 
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/add_movie"
+    <ListView
+        android:id="@+id/listViewOfMovies"
+        android:layout_width="424dp"
+        android:layout_height="549dp"
+
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:id="@+id/listViewOfMovies"
-            android:layout_width="395dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="28dp">
-
-        </LinearLayout>
-
-
-    </ScrollView>
+    </ListView>
 
     <Button
         android:id="@+id/add_movie"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="71dp"
         android:layout_gravity="bottom"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="vertical"
         android:text="ADD MOVIE"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listViewOfMovies"
+        app:layout_constraintVertical_bias="1.0" />
 
 </android.support.constraint.ConstraintLayout>

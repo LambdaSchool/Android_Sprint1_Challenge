@@ -30,40 +30,8 @@ public class MovieDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies_details);
 
-        entry = (MovieEntry) getIntent().getSerializableExtra(MovieEntry.TAG);
-        if(entry == null) {
-            entry = new MovieEntry(MovieEntry.INVALID_ID);
-        }
 
-        if(entry != null){
 
-            movieName.setText((CharSequence) movieName);
-        }
-
-        context = this;
-        aSwitch = findViewById(R.id.iWatchedThisMovie);
-        aSwitch.setChecked(false);
-        deleteMovie = findViewById(R.id.deleteButton);
-
-        movieName = (EditText) findViewById(R.id.editMovie);
-            final String mn = movieName.getText().toString();
-
-        saveMovie =  (Button) findViewById(R.id.saveButton);
-        saveMovie.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mn.length() != 0){
-                    movieNameString.add(mn);
-                    movieName.setText("");
-
-                    Intent intent = new Intent(context,
-                            MovieListActivity.class);
-                    intent.putExtra("movieNameString",movieNameString);
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        });
 
 
 

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +21,7 @@ public class MovieListActivity extends AppCompatActivity {
     public static final int EDIT_ENTRY_REQUEST_CODE = 2;
     private Button addMovieButton;
     Context context;
-    private LinearLayout movieList;
+    private ListView movieList;
     private ArrayList<String> movieEntries;
 
 
@@ -43,8 +44,6 @@ public class MovieListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 openButtonPage();
             }
-
-
 
         });
 
