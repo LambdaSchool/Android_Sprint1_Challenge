@@ -27,18 +27,16 @@ class EditActivity : AppCompatActivity() {
 
    var bundle:Bundle?=intent.extras
         if(bundle!=null) {
-            var selectedMovie: MovieData = bundle!!.getSerializable("SelectedMovie") as MovieData
+            var selectedMovie: MovieData = bundle.getSerializable("SelectedMovie") as MovieData
             editText_movieName.setText(selectedMovie.name)
             watched_switch.isChecked=selectedMovie.watched
 
         }
-
-
         button_save.setOnClickListener {
             saveMovie()
         }
         button_delete.setOnClickListener {
-
+          deleteMovie()
         }
 
     }
@@ -47,6 +45,12 @@ class EditActivity : AppCompatActivity() {
         val resultIntent = Intent()
         resultIntent.putExtra(MOVIE_KEY,MovieData(editText_movieName.text.toString(),watched_switch.isChecked))
         setResult(Activity.RESULT_OK, resultIntent)
+        finish() // destroy the activity
+    }
+    fun deleteMovie(){
+        val resultIntent = Intent()
+        resultIntent.putExtra(MOVIE_KEY,MovieData(editText_movieName.text.toString(),watched_switch.isChecked))
+        setResult(Activity.RESULT_CANCELED, resultIntent)
         finish() // destroy the activity
     }
     override fun onBackPressed() {

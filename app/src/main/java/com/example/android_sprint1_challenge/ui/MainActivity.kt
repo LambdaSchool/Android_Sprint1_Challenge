@@ -41,6 +41,11 @@ class MainActivity : AppCompatActivity() {
                     list_layout.addView(createTextView(newMovie,movieList.size-1))
 
     }
+        else if(requestCode == REQUEST_CODE_ADD_MOVIE&&resultCode==Activity.RESULT_CANCELED){
+        /*This is the result for Delete Button Listener from EditActivity
+            we don't do anything here because the view and MovieData is already removed when we go to Edit movie Page
+            */
+        }
 
             super.onActivityResult(requestCode, resultCode, data)
 
