@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.style.StrikethroughSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 public class MovieList extends AppCompatActivity {
 
@@ -17,62 +20,48 @@ public class MovieList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_list);
 
+        final LinearLayout linearLayout = findViewById(R.id.linear_layout_movies);
         Intent intent = getIntent();
-        final Movie movieToAdd = (Movie) intent.getSerializableExtra("movie");
+        MovieRepository.addMovieToList((Movie)intent.getSerializableExtra(getString(R.string.movie_key)));
+        ArrayList<Movie> movieList = MovieRepository.getMovieList();
 
-        LinearLayout linearLayout = findViewById(R.id.linear_layout_movies);
-
-        if (movieToAdd != null) {
-            if (!Movie.movieList.contains(movieToAdd))
-                Movie.movieList.add(movieToAdd);
-        }
-
-        if (Movie.movieList.size() > 0) {
-            for (Movie movie : Movie.movieList) {
-                if (!Movie.movieList.contains(movie)) {
-                    Movie.movieList.add(movie);
+        if (movieList.size() > 0) {
+            for (Movie movie : movieList) {
+                if (!movieList.contains(movie)) {
+                    movieList.add(movie);
                 }
-                addTextViewToLinearLayout(movie, linearLayout, new TextView(this));
+                final TextView addTextView = new TextView(this);
+                addTextView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                addTextView.setText(movie.getMovieTitle());
+                addTextView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
+                if (movie.isWatched())
+                    addTextView.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+                addTextView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Movie movie = new Movie(addTextView.getText().toString(), addTextView.getPaint().isStrikeThruText());
+                        MovieRepository.removeMovieFromList(movie);
+                        linearLayout.removeView(addTextView);
+                        launchMovieEditActivity(movie);
+                    }
+                });
+
+                linearLayout.addView(addTextView);
             }
         }
-
 
         Button buttonAddMovie = findViewById(R.id.button_add_movie);
         buttonAddMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MovieEdit.class);
-                intent.putExtra("movie", new Movie());
-                startActivity(intent);
+                launchMovieEditActivity(new Movie());
             }
         });
     }
 
-    private void addTextViewToLinearLayout(Movie movieToAdd, final LinearLayout linearLayout, final TextView addTextView) {
-        addTextView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        addTextView.setText(movieToAdd.getMovieTitle());
-        addTextView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
-        if (movieToAdd.isWatched())
-            addTextView.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-        addTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Movie movie = new Movie(addTextView.getText().toString(), addTextView.getPaint().isStrikeThruText());
-                Movie.movieList.remove(movie);
-                for (int i = 0; i < Movie.movieList.size(); i++) {
-                    Movie movieNext = Movie.movieList.get(i);
-                    if (movieNext.getMovieTitle().equals(movie.getMovieTitle())) {
-                        Movie.movieList.remove(i);
-                        break;
-                    }
-                }
-                linearLayout.removeView(addTextView);
-                Intent intent = new Intent(getApplicationContext(), MovieEdit.class);
-                intent.putExtra("movie", movie);
-                startActivity(intent);
-            }
-        });
-
-        linearLayout.addView(addTextView);
+    private void launchMovieEditActivity(Movie movieToPass) {
+        Intent intent = new Intent(getApplicationContext(), MovieEdit.class);
+        intent.putExtra(getString(R.string.movie_key), movieToPass);
+        startActivity(intent);
     }
 }
