@@ -11,14 +11,14 @@ import com.example.android_sprint1_challenge.model.MovieData
 import kotlinx.android.synthetic.main.activity_edit.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.ArrayList
+import android.graphics.Paint
 
 class MainActivity : AppCompatActivity() {
     internal var movieList: ArrayList<MovieData> = ArrayList()
 
     companion object {
         const val REQUEST_CODE_ADD_MOVIE = 1
-        const val REQUEST_CODE_DELETE_MOVIE = 2
-        const val REQUEST_CODE_EDIT_MOVIE = 3
+
     }
 
 
@@ -34,35 +34,36 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         //  process result from the edit activity
-        if (resultCode == Activity.RESULT_OK) {
-            when (requestCode) {
-                REQUEST_CODE_ADD_MOVIE -> {
+        if (requestCode == REQUEST_CODE_ADD_MOVIE&&resultCode==Activity.RESULT_OK) {
+
                     val newMovie = data!!.getSerializableExtra(EditActivity.MOVIE_KEY)as MovieData
                     movieList.add(newMovie)
-                    list_layout.addView(createTextView(newMovie.name,movieList.size-1))
-                }
-                REQUEST_CODE_DELETE_MOVIE->{
+                    list_layout.addView(createTextView(newMovie,movieList.size-1))
 
-                }
-                REQUEST_CODE_EDIT_MOVIE->{
-
-                }
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data)
     }
-    fun createTextView(movieName: String,index:Int): TextView {
-        val view = TextView(this)
-        view.text = movieName
-        view.textSize = 24f
-        view.tag=index
 
+            super.onActivityResult(requestCode, resultCode, data)
+
+    }
+    fun createTextView(movie: MovieData,index:Int): TextView {
+        val view = TextView(this)
+        view.text = movie.name
+        view.textSize = 24f
+        view.id=index
+       if(movie.watched)
+            view.paintFlags = view.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         view.setOnClickListener {
 
-
+            val intent = Intent(this,EditActivity::class.java)
+            intent.putExtra("SelectedMovie",movieList[index])
+            movieList.removeAt(index)
+            startActivityForResult(intent,  REQUEST_CODE_ADD_MOVIE)
+            list_layout.removeView(view)
         }
+
 
         return view
     }
 
-    }
+
+}
