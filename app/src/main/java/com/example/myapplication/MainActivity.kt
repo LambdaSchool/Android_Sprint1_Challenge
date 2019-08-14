@@ -1,15 +1,12 @@
 package com.example.myapplication
 
 import android.app.Activity
-import android.content.Context
 
 import android.content.Intent
 
 import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.LinearLayout
 import android.widget.TextView
 
 
@@ -18,88 +15,76 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.list_layout
 
 
-
 class MainActivity : AppCompatActivity() {
 
-    companion object{
-        //my static constant
-        const val MOVIE_REQUEST = 654
+    companion object {
+
+        val EXTRA_STRING: String = "data"
+
+        val RESULT_INT: Int = 54321
 
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
-        //take me to next activity
+
+      text_view_sample_1.setOnClickListener {
+            intentGenerator(MovieList(text_view_sample_1.text.toString(), text_view_sample_1.background != null))
+            list_layout.removeView(it)
+        }
+
+
+        text_view_sample_2.setOnClickListener {
+            intentGenerator(MovieList(text_view_sample_2.text.toString(), text_view_sample_2.background != null))
+            list_layout.removeView(it)
+        }
+
+
+
+        text_view_sample_3.setOnClickListener {
+            intentGenerator(MovieList(text_view_sample_3.text.toString(), text_view_sample_3.background != null))
+            list_layout.removeView(it)
+        }
+
         button_add_movie.setOnClickListener {
-            val intent = Intent(this, NextActivity::class.java)
-            startActivityForResult(intent, MOVIE_REQUEST)
+            intentGenerator(MovieList(getString(R.string.no_movie_entry)))
         }
     }
-    //making a TextView programatically to program views for it later
-    fun createTextView(content: String, has_been_watched : Boolean) : TextView{
-        val listView = TextView(this)
-        listView.text = content
-        listView.textSize = 24f
-        listView.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
 
-        //cross out text
-        if(has_been_watched){
-            listView.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-        }
-
-        //delete views
-        listView.setOnClickListener {
-
-            list_layout.removeView(listView)
-            val intent = Intent(this, NextActivity::class.java)
-
-            startActivityForResult(intent, MOVIE_REQUEST)
-
-        }
-        return listView
+    private fun intentGenerator(name:  MovieList) {
+        val intent = Intent(this,  NextActivity::class.java)
+        intent.putExtra(EXTRA_STRING, name)
+        startActivityForResult(intent, RESULT_INT)
     }
 
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == RESULT_INT && resultCode == Activity.RESULT_OK) {
 
-        if(resultCode == Activity.RESULT_OK){
-            //pass words to the list
-            when(requestCode){
-                MOVIE_REQUEST -> {
-                    val text = data?.getStringExtra(NextActivity.MOVIE_ENTRY).toString()
-                    val watched = data?.getBooleanExtra(NextActivity.WATCHED, false)
-                    val delete = data?.getStringExtra(NextActivity.DELETE)
-
-                    //if list is null return null
-                    if(text == null) {
-
-                    }
-                    //and if not, populate
-                    if(text != null && text != "" && watched != null){
-
-                        //listView2 is just another code for my programmatic TextView
-                        val listView2 : TextView = createTextView(text, watched)
-
-                        list_layout.addView(listView2)
-
-                    } else if(delete != null && delete != ""){
-                        for (x in 0..(list_layout.childCount)){
-
-                            val listView3 : TextView = list_layout.getChildAt(x) as TextView
-
-                            if(listView3.text == delete){
-
-                                list_layout.removeViewAt(x)
-
-                            }
-                        }
-                    }
-                }
-            }
+            val name: MovieList = data?.getSerializableExtra(MainActivity.EXTRA_STRING) as MovieList
+            val textView: TextView = textViewGenerator(name)
+            list_layout.addView(textView)
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
-}
 
+
+    fun textViewGenerator(name: MovieList): TextView {
+        val textView: TextView = TextView(this)
+        textView.textSize = 30f
+        textView.text = name.name
+
+        if (name.watched) textView.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG)
+
+        textView.setOnClickListener {
+            intentGenerator(name)
+            list_layout.removeView(it)
+        }
+        return textView
+    }
+}

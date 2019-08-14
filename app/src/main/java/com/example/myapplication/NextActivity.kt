@@ -9,23 +9,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 
 import android.os.Bundle
-
-
+import com.example.myapplication.MainActivity.Companion.EXTRA_STRING
 
 
 class NextActivity : AppCompatActivity() {
-
-
-
-    companion object{
-
-        const val MOVIE_ENTRY = "MOVIE_KEY"
-
-        const val WATCHED = "WATCHED_KEY"
-
-        const val DELETE = "DELETE_KEY"
-
-    }
 
 
 
@@ -36,40 +23,63 @@ class NextActivity : AppCompatActivity() {
         setContentView(R.layout.activity_next)
 
 
+        //value the movie in the movie list
+        val movie :MovieList= intent.getSerializableExtra(MainActivity.EXTRA_STRING) as MovieList
 
-        button_save.setOnClickListener {view->
 
-            val movie = edit_entry.text.toString()
+                //null exception
+        if (movie.name!=getString(R.string.no_movie_entry)) {
 
-            val watched : Boolean = checkbox.isChecked
+            edit_entry.setText(movie.name)
 
-            //initiating Intent then putExtra
+            checkbox.isChecked=movie.watched
+
+        }
+
+
+
+        button_save.setOnClickListener {
+
             val intent = Intent()
-            intent.putExtra(MOVIE_ENTRY, movie)
-            intent.putExtra(WATCHED, watched)
+
+            intent.putExtra(MainActivity.EXTRA_STRING, MovieList(edit_entry.text.toString(),checkbox.isChecked))
+
             setResult(Activity.RESULT_OK, intent)
 
             finish()
+
         }
-        //initiating button_delete with an Intent here, and coding it on main activity
+
+
+
         button_delete.setOnClickListener {
-            val movie = edit_entry.text.toString()
-            val intent = Intent()
-            intent.putExtra(DELETE, movie)
-            setResult(Activity.RESULT_OK, intent)
 
-            finish()
+            onBackPressed()
+
         }
+
     }
-    //save button and onBack Press button have the same code
+
+
+
+    /**
+
+     * Take care of popping the fragment back stack or finishing the activity
+
+     * as appropriate.
+
+     */
+
     override fun onBackPressed() {
-        val movie = edit_entry.text.toString()
-        val watched = checkbox.isChecked
+
         val intent = Intent()
-        intent.putExtra(MOVIE_ENTRY, movie)
-        intent.putExtra(WATCHED, watched)
-        setResult(Activity.RESULT_OK, intent)
+
+        intent.putExtra(MainActivity.EXTRA_STRING, MovieList(getString(R.string.no_movie_entry)))
+
+        setResult(Activity.RESULT_CANCELED, intent)
 
         finish()
+
     }
+
 }
